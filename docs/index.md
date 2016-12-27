@@ -1,5 +1,3 @@
-% Matrix-Ops: JS Matrix Operations
-
 # Matrix-Ops: JS Matrix Operations
 
 ## Table of Contents

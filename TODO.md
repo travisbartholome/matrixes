@@ -20,7 +20,7 @@
 
 - [x] Make initial commit and push to remote GitHub repository.
 
-- [ ] Make repository viewable on GitHub Pages using the /docs directory.
+- [x] Make repository viewable on GitHub Pages using the /docs directory.
 
     * Pull those changes back down.
 
@@ -54,6 +54,6 @@
 
 - [ ] Create a /example directory with example scripts.
 
-- [ ] Consider populating the package.json `directories` property more fully.
+- [ ] Consider populating the package.json `directories` property more fully. See https://docs.npmjs.com/files/package.json.
 
-- [ ] Add test cases to a .npmignore file, or figure out the accepted way to prevent these from being part of the package.
+- [ ] Add test cases to a .npmignore file, or figure out the accepted way to prevent these from being part of the package (assuming that's desired).
