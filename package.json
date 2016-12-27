@@ -1,14 +1,28 @@
 {
   "name": "matrix-ops",
   "version": "1.0.0",
-  "description": "Performs matrix operations.",
-  "main": "createMatrix.js",
+  "description": "Performs mathematical matrix operations using 2D arrays (arrays of arrays).",
+  "main": "matrix.js",
   "directories": {
+    "doc": "docs",
     "test": "test"
   },
   "scripts": {
     "test": "mocha"
   },
-  "author": "",
-  "license": "ISC"
+  "author": {
+    "name": "Travis Bartholome"
+  },
+  "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/travisbartholome/matrix-ops.git"
+  },
+  "bugs": {
+    "url": "https://github.com/travisbartholome/matrix-ops/issues"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
 }

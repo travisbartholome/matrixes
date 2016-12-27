@@ -18,7 +18,7 @@
 
 - [x] Add a #zeros(int rows, int columns) method to return a rectangular matrix of zeros.
 
-- [ ] Make initial commit and push to remote GitHub repository.
+- [x] Make initial commit and push to remote GitHub repository.
 
 - [ ] Make repository viewable on GitHub Pages using the /docs directory.
 
@@ -31,6 +31,8 @@
 - [ ] Try to DRY up the tests a little bit when testing things like error handling and invalid arguments.
 
 - [ ] Refactor so that all functions are in matrix.js.
+
+    * Definitely change the version if/when you do this, just for practice if nothing else.
 
     * Avoids having to `require` the assertion functions to validate input, etc.
 
@@ -49,3 +51,9 @@
         3. `assert.equal(equals(matrix.createMatrix('9/8, 1/2, 3/4'), [[1.125],[0.5],[0.75]]), true);`
 
 - [ ] Generate table of contents for the documentation (with internal links).
+
+- [ ] Create a /example directory with example scripts.
+
+- [ ] Consider populating the package.json `directories` property more fully.
+
+- [ ] Add test cases to a .npmignore file, or figure out the accepted way to prevent these from being part of the package.
