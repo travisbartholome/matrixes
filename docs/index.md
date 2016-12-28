@@ -159,6 +159,16 @@ Returns the matrix product `matrixOne` * `matrixTwo`.
 Throws an error if the two matrices cannot be multiplied (mathematically speaking).
 Also errors if either matrix is non-rectangular.
 
+### matrix.scale(matrix, scalar)
+
+- matrix: <Matrix>
+- scalar: <Number>
+
+Returns a matrix equal to `matrix` scaled by `scalar`.
+That is, it returns a matrix `newMatrix` such that each `newMatrix[i][j]` is equal to `matrix[i][j] * scalar`.
+
+Note that this *doesn't* alter the passed matrix, it returns a new one instead.
+
 ### matrix.zeros(numRows, numColumns)
 
 - numRows: <Integer> *or* a float, double, etc. that is equivalent to an integer

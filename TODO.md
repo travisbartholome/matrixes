@@ -24,7 +24,13 @@
 
     * Pull those changes back down.
 
-- [ ] Add a #scale(Matrix matrix) method to multiply a matrix by a constant (scalar).
+- [x] Add a #scale(Matrix matrix, Number scalar) method to multiply a matrix by a constant (scalar).
+
+    * Had to alter #equals to account for the inconsistency of floating-point equality.
+
+- [ ] Allow user to decide whether or not to use near equality for #equals.
+
+- [ ] Allow user to set the precision of the near equality checks in #equals.
 
 - [ ] Add a #inverse method to find the inverse of a matrix.
 
@@ -37,6 +43,12 @@
     * Avoids having to `require` the assertion functions to validate input, etc.
 
     * Keep assertion methods user-accessible somehow.
+
+- [ ] Consider adding methods that alter the argument in place.
+
+    * These might be best as methods on `matrix.prototype` rather than on `matrix` itself.
+
+    * I.e., usage would be `A.scale(2)` (doubles A without creating a new matrix) vs. `B = matrix.scale(A, 2);` (creates a new matrix that is double matrix A).
 
 - [ ] Add support for math expressions in #createMatrix. Avoid using `eval`.
 

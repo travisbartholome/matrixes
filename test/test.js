@@ -152,6 +152,29 @@ describe('multiply', function() {
   });
 });
 
+describe('scale', function() {
+  it('Should multiply each element of the passed matrix by the passed scalar.', function() {
+    assert.equal(equals(matrix.scale([[1, 1, 2], [2, 3, 4]], 2), [[2, 2, 4], [4, 6, 8]]), true);
+    assert.equal(equals(matrix.scale([[1, 1], [2, 3]], 0), [[0, 0], [0, 0]]), true);
+    assert.equal(equals(matrix.scale([[0.4], [2]], 1.5), [[0.6], [3]]), true);
+    assert.equal(equals(matrix.scale([[3], [1], [0]], -1.3), [[-3.9], [-1.3], [0]]), true);
+  });
+
+  it('Should throw an error if the scalar is not a finite number.', function() {
+    expect(() => matrix.scale([[1, 2], [1, 2]], NaN)).to.throw('Invalid scalar: must be a finite number');
+    expect(() => matrix.scale([[1, 2], [1, 2]], Infinity)).to.throw('Invalid scalar: must be a finite number');
+    expect(() => matrix.scale([[1, 2], [1, 2]], 'asdf')).to.throw('Invalid scalar: must be a finite number');
+    expect(() => matrix.scale([[1, 2], [1, 2]], {})).to.throw('Invalid scalar: must be a finite number');
+  });
+
+  it('Should throw an error if the passed matrix is not valid.', function() {
+    expect(() => matrix.scale([[1], [1, 2]], 2)).to.throw('Invalid matrix');
+    expect(() => matrix.scale({ 0: [1] }, 2)).to.throw('Invalid matrix');
+    expect(() => matrix.scale(6, 2)).to.throw('Invalid matrix');
+    expect(() => matrix.scale('', 2)).to.throw('Invalid matrix');
+  });
+});
+
 
 
 /* Assertions */

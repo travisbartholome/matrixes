@@ -1,5 +1,9 @@
 const isValidMatrix = require('./isValidMatrix.js');
 
+function almostEqual(numberOne, numberTwo, precision) {
+  return Math.abs(numberOne - numberTwo) < precision;
+}
+
 function equals(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) throw new Error('Invalid matrix');
 
@@ -8,7 +12,12 @@ function equals(matrixOne, matrixTwo) {
 
   for (let i = 0; i < matrixOne.length; i++) {
     for (let j = 0; j < matrixOne[0].length; j++) {
-      if (matrixOne[i][j] !== matrixTwo[i][j]) return false;
+      if (matrixOne[i][j] !== matrixTwo[i][j]) {
+        // TODO: Allow user to decide whether or not to allow near equality.
+        // TODO: Allow user to set default precision for these calculations, then use that set precision in this function.
+        if (almostEqual(matrixOne[i][j], matrixTwo[i][j], 1e-15)) return true;
+        return false;
+      }
     }
   }
 
