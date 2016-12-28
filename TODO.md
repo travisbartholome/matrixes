@@ -28,7 +28,7 @@
 
     * Had to alter #equals to account for the inconsistency of floating-point equality.
 
-- [ ] Allow user to decide whether or not to use near equality for #equals.
+- [x] Allow user to decide whether or not to use near equality for #equals.
 
 - [ ] Allow user to set the precision of the near equality checks in #equals.
 

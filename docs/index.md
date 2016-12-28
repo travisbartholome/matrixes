@@ -46,10 +46,11 @@ matrixString should fit one of the following patterns:
 
 All of the above options will create the matrix `[[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
 
-### matrix.equals(matrixOne, matrixTwo)
+### matrix.equals(matrixOne, matrixTwo [, useNearEquality])
 
 - matrixOne: <Matrix>
 - matrixTwo: <Matrix>
+- useNearEquality: <Boolean>
 
 Returns a boolean: `true` if the two matrices are equal, `false` otherwise.
 
@@ -60,6 +61,32 @@ For the sake of this project, the two matrices are equal if:
 - All of their entries are equal.
 
 - Both matrices are valid.
+
+If `useNearEquality` is set to true, `equals` will compare the matrices at a level of precision lower than that of standard JavaScript ===.
+By default, if `useNearEquality` is true, entries can differ by up to 2e-15 and still be considered equal.
+That threshold is arbitrary, but roughly one order of magnitude higher than the typical tolerance of ===.
+This compensates for the fact that many operations on floating-point numbers will introduce an error larger than what JavaScript === will allow.
+
+`useNearEquality` defaults to `false`if not specified.
+
+For example:
+
+```javascript
+
+console.log(1.0000000000000005 === 1) // => false
+
+let A = matrix.createMatrix("1.0000000000000005");
+let B = matrix.createMatrix("1");
+
+console.log(matrix.equals(A, B, true)); // => true
+console.log(matrix.equals(A, B)); // => false
+
+// JavaScript doesn't operate with this much precision for values >= 1 ?
+let C = createMatrix("1.0000000000000001"); // 1 + 1e-16
+console.log(C); // => [ [ 1 ] ]
+console.log(matrix.equals(B, C)); // => true
+
+```
 
 ### matrix.identity(size)
 

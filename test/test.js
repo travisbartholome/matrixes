@@ -156,8 +156,8 @@ describe('scale', function() {
   it('Should multiply each element of the passed matrix by the passed scalar.', function() {
     assert.equal(equals(matrix.scale([[1, 1, 2], [2, 3, 4]], 2), [[2, 2, 4], [4, 6, 8]]), true);
     assert.equal(equals(matrix.scale([[1, 1], [2, 3]], 0), [[0, 0], [0, 0]]), true);
-    assert.equal(equals(matrix.scale([[0.4], [2]], 1.5), [[0.6], [3]]), true);
-    assert.equal(equals(matrix.scale([[3], [1], [0]], -1.3), [[-3.9], [-1.3], [0]]), true);
+    assert.equal(equals(matrix.scale([[0.4], [2]], 1.5), [[0.6], [3]], true), true);
+    assert.equal(equals(matrix.scale([[3], [1], [0]], -1.3), [[-3.9], [-1.3], [0]], true), true);
   });
 
   it('Should throw an error if the scalar is not a finite number.', function() {
@@ -201,6 +201,15 @@ describe('equals', function() {
     assert.equal(equals(a, e), false);
     assert.equal(equals(b, c), false);
   });
+
+  it('Should allow the user to specify whether or not to use near-equality (e.g., for comparing floats).', function() {
+    assert.equal(equals([[1.1, 1]], [[1.100000000000001, 1]], true), true);
+    assert.equal(equals([[1.1, 1]], [[1.100000000000001, 1]], false), false);
+  });
+
+  it('Should avoid using near-equality by default.', function() {
+    assert.equal(equals([[1.1, 1]], [[1.100000000000001, 1]]), false);
+  })
 
   it('Should throw an error if either matrix is invalid.', function() {
     expect(() => equals(a, i.a)).to.throw('Invalid matrix');
