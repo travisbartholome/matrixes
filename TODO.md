@@ -34,6 +34,8 @@
 
 - [x] Allow user to set the precision of the near equality checks in #equals.
 
+- [x] Improve tests for #multiply. Add tests for error handling capabilities.
+
 - [ ] Add a #det(Matrix matrix) method to find the determinant of a given matrix.
 
 - [ ] Add a #inverse method to find the inverse of a matrix.

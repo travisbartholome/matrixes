@@ -1,15 +1,13 @@
-// Pulling in other matrix functions.
-const isRectangular = require("./isRectangular.js");
+const isValidMatrix = require('./isValidMatrix.js');
 
 function matrixMult(A, B) {
-  // Check if the matrices are both rectangular.
-  if (!isRectangular(A) || !isRectangular(B)) {
-    throw new Error("Both matrices must be rectangular.");
+  if (!isValidMatrix(A) || !isValidMatrix(B)) {
+    throw new Error('Invalid matrix');
   }
 
-  // Check if the matrices can be multiplied.
+  // Check if the matrices can be legally multiplied (mathematically speaking).
   if (A[0].length !== B.length) {
-    throw new Error("Cannot multiply these matrices. Matrices must be of sizes m x n and n x p to produce a valid answer.");
+    throw new Error('Cannot multiply: matrices must be of sizes m x n and n x p to produce a valid answer');
   }
 
   // Multiply matrices.
@@ -28,15 +26,5 @@ function matrixMult(A, B) {
   }
   return result;
 }
-
-/*const inputOne = process.argv[2];
-const inputTwo = process.argv[3];
-
-let matrixOne = Parser.createMatrix(inputOne);
-let matrixTwo = Parser.createMatrix(inputTwo);*/
-
-//console.log(matrixOne);
-
-//console.log(matrixMult(matrixOne, matrixTwo));
 
 module.exports = matrixMult;

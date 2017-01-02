@@ -150,6 +150,17 @@ describe('#multiply', function() {
     assert.equal(str(matrix.multiply([[1, 0], [0, 1]], [[8], [6]])), str([[8], [6]]));
     assert.equal(str(matrix.multiply([[1], [2]], [[2, 3]])), str([[2, 3], [4, 6]]));
   });
+
+  it('should throw an error if either matrix is invalid', function() {
+    for (let i = 0; i < INVALID_MATRICES.length; i++) {
+      expect(() => matrix.multiply(INVALID_MATRICES[i], [[1, 2],[3, 4]])).to.throw('Invalid matrix');
+    }
+  });
+
+  it('should throw an error if the matrices can\'t legally be multiplied', function() {
+    let noMult = 'Cannot multiply: matrices must be of sizes m x n and n x p to produce a valid answer';
+    expect(() => matrix.multiply([[1, 2, 3], [4, 5, 6]], [[1, 2], [3, 4]])).to.throw(noMult);
+  });
 });
 
 describe('#scale', function() {

@@ -194,8 +194,9 @@ This means that `[[]]` is *not* a valid matrix, but `[[1]]` is.
 
 Returns the matrix product `matrixOne` * `matrixTwo`.
 
-Throws an error if the two matrices cannot be multiplied (mathematically speaking).
-Also errors if either matrix is non-rectangular.
+Throws an error if either matrix is invalid or if the two matrices cannot be multiplied due to their dimensions.
+To be multipliable, `matrixOne` must have dimensions *m x n* and `matrixTwo` must have dimensions *n x p*.
+(For any positive, nonzero integers m, n, and p.)
 
 ### matrix.scale(matrix, scalar)
 
