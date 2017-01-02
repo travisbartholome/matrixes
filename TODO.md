@@ -30,9 +30,15 @@
 
 - [x] Allow user to decide whether or not to use near equality for #equals.
 
-- [ ] Allow user to set the precision of the near equality checks in #equals.
+- [x] Add getPrecision and setPrecision methods for #equals near-equality precision.
+
+- [x] Allow user to set the precision of the near equality checks in #equals.
+
+- [ ] Add a #det(Matrix matrix) method to find the determinant of a given matrix.
 
 - [ ] Add a #inverse method to find the inverse of a matrix.
+
+- [ ] Add a #reduce method. Support both regular and augmented matrices.
 
 - [ ] Try to DRY up the tests a little bit when testing things like error handling and invalid arguments.
 

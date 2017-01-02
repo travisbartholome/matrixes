@@ -15,3 +15,7 @@ matrix.is2DArray = require('./functions/is2DArray.js');
 matrix.isRectangular = require('./functions/isRectangular.js');
 matrix.isSquare = require('./functions/isSquare.js');
 matrix.isValidMatrix = require('./functions/isValidMatrix.js');
+
+// Other methods
+matrix.getPrecision = require('./functions/precision.js').getPrecision;
+matrix.setPrecision = require('./functions/precision.js').setPrecision;

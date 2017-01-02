@@ -64,8 +64,11 @@ For the sake of this project, the two matrices are equal if:
 
 If `useNearEquality` is set to true, `equals` will compare the matrices at a level of precision lower than that of standard JavaScript ===.
 By default, if `useNearEquality` is true, entries can differ by up to 2e-15 and still be considered equal.
-That threshold is arbitrary, but roughly one order of magnitude higher than the typical tolerance of ===.
+That threshold is arbitrary, but it's roughly one order of magnitude higher than the typical tolerance of ===.
 This compensates for the fact that many operations on floating-point numbers will introduce an error larger than what JavaScript === will allow.
+
+The user can set a new level of precision/tolerance for near-equality using `matrix.setPrecision`.
+The user can also call `matrix.getPrecision` to return the current precision level.
 
 `useNearEquality` defaults to `false`if not specified.
 
@@ -87,6 +90,14 @@ console.log(C); // => [ [ 1 ] ]
 console.log(matrix.equals(B, C)); // => true
 
 ```
+
+### matrix.getPrecision()
+
+Returns the level of precision that will be used for testing near-equality in `matrix.equals`.
+The user can alter this level using matrix.setPrecision(newPrecision).
+
+If no precision is set beforehand, this value defaults to 2e-15.
+<!-- TODO: Add link to #setPrecision here -->
 
 ### matrix.identity(size)
 
@@ -195,6 +206,17 @@ Returns a matrix equal to `matrix` scaled by `scalar`.
 That is, it returns a matrix `newMatrix` such that each `newMatrix[i][j]` is equal to `matrix[i][j] * scalar`.
 
 Note that this *doesn't* alter the passed matrix, it returns a new one instead.
+
+### matrix.setPrecision(newPrecision)
+
+- newPrecision: <Number> *or* "default"
+
+Sets a new precision for determining near-equality in matrix.equals.
+Also *returns* the new precision that the user just set.
+
+Calling `matrix.setPrecision("default")` sets the precision level to 2e-15.
+
+`newPrecision` must be either the string "default" or a finite number (not NaN).
 
 ### matrix.zeros(numRows, numColumns)
 
