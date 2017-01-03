@@ -203,6 +203,23 @@ describe('#scale', function() {
   });
 });
 
+describe('#subtract', function() {
+  it('should return the difference of the first and second matrices', function() {
+    assert.equal(equals(matrix.subtract([[1, 2, 3],[4, 5, 6]], [[0, -1, 2],[3, -4, -5]]), [[1, 3, 1],[1, 9, 11]]), true);
+    assert.equal(equals(matrix.subtract([[1, 2], [1, 2]], [[0, 2], [3, -4]]), [[1, 0], [-2, 6]]), true);
+  });
+
+  it('should throw an error if the two matrices do not have the same dimensions', function() {
+    expect(() => matrix.subtract([[1, 2, 3], [1, 2, 3]], [[1, 2], [3, 4]])).to.throw('Matrices must have the same dimensions');
+  });
+
+  it('should throw an error if either matrix is invalid', function() {
+    for (let i = 0; i < INVALID_MATRICES.length; i++) {
+      expect(() => matrix.subtract(INVALID_MATRICES[i], [[1, 2],[3, 4]])).to.throw('Invalid matrix');
+    }
+  });
+});
+
 
 
 /* Assertions */

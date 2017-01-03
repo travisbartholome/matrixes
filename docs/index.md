@@ -229,6 +229,16 @@ Calling `matrix.setPrecision("default")` sets the precision level to 2e-15.
 
 `newPrecision` must be either the string "default" or a finite number (not NaN).
 
+### matrix.subtract(matrixOne, matrixTwo)
+
+- matrixOne: <Matrix>
+- matrixTwo: <Matrix>
+
+Returns the matrix difference `matrixOne` minus `matrixTwo`.
+Doesn't alter either argument.
+
+Throws an error if the matrices do not have the same dimensions or if either matrix is invalid.
+
 ### matrix.zeros(numRows, numColumns)
 
 - numRows: <Integer> *or* a float, double, etc. that is equivalent to an integer

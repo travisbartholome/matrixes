@@ -38,7 +38,7 @@
 
 - [x] Add a #add method.
 
-- [ ] Add a #subtract method.
+- [x] Add a #subtract method.
 
 - [ ] Add a #det(Matrix matrix) method to find the determinant of a given matrix.
 

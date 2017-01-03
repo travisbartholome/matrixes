@@ -9,6 +9,7 @@ matrix.zeros = require('./functions/zeros.js');
 matrix.add = require('./functions/add.js');
 matrix.multiply = require('./functions/multiply.js');
 matrix.scale = require('./functions/scale.js');
+matrix.subtract = require('./functions/subtract.js');
 
 // Assertions
 matrix.equals = require('./functions/equals.js');
