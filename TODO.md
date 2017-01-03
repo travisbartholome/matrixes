@@ -36,6 +36,10 @@
 
 - [x] Improve tests for #multiply. Add tests for error handling capabilities.
 
+- [x] Add a #add method.
+
+- [ ] Add a #subtract method.
+
 - [ ] Add a #det(Matrix matrix) method to find the determinant of a given matrix.
 
 - [ ] Add a #inverse method to find the inverse of a matrix.

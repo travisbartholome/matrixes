@@ -143,6 +143,23 @@ describe('#zeros', function() {
 
 /* Operators */
 
+describe('#add', function() {
+  it('should return the sum of two matrices', function() {
+    assert.equal(equals(matrix.add([[1, 2, 3],[4, 5, 6]], [[0, -1, 2],[3, -4, -5]]), [[1, 1, 5],[7, 1, 1]]), true);
+    assert.equal(equals(matrix.add([[1, 2], [1, 2]], [[0, 2], [3, -4]]), [[1, 4], [4, -2]]), true);
+  });
+
+  it('should throw an error if the two matrices do not have the same dimensions', function() {
+    expect(() => matrix.add([[1, 2, 3], [1, 2, 3]], [[1, 2], [3, 4]])).to.throw('Matrices must have the same dimensions');
+  });
+
+  it('should throw an error if either matrix is invalid', function() {
+    for (let i = 0; i < INVALID_MATRICES.length; i++) {
+      expect(() => matrix.add([[1, 2],[3, 4]], INVALID_MATRICES[i])).to.throw('Invalid matrix');
+    }
+  });
+});
+
 describe('#multiply', function() {
   it('should return the matrix product of two numeric matrices.', function() {
     assert.equal(str(matrix.multiply([[1, 2, 3], [4, 5, 6]], [[1, 2],[3, 4], [5, 6]])), str([[22, 28], [49, 64]]));

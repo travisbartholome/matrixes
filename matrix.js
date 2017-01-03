@@ -6,6 +6,7 @@ matrix.identity = require('./functions/identity.js');
 matrix.zeros = require('./functions/zeros.js');
 
 // Operations
+matrix.add = require('./functions/add.js');
 matrix.multiply = require('./functions/multiply.js');
 matrix.scale = require('./functions/scale.js');
 

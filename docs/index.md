@@ -14,6 +14,16 @@ It's been my first real foray into TDD, which seems to be working fairly well.
 
 # Documentation
 
+### matrix.add(matrixOne, matrixTwo)
+
+- matrixOne: <Matrix>
+- matrixTwo: <Matrix>
+
+Returns the matrix sum of `matrixOne` and `matrixTwo`.
+Doesn't alter either argument.
+
+Throws an error if the matrices do not have the same dimensions or if either matrix is invalid.
+
 ### matrix.createMatrix(matrixString)
 
 - matrixString: <String>
