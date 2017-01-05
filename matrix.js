@@ -7,6 +7,7 @@ matrix.zeros = require('./functions/zeros.js');
 
 // Operations
 matrix.add = require('./functions/add.js');
+matrix.inverse = require('./functions/inverse.js');
 matrix.multiply = require('./functions/multiply.js');
 matrix.scale = require('./functions/scale.js');
 matrix.subtract = require('./functions/subtract.js');
@@ -19,5 +20,6 @@ matrix.isSquare = require('./functions/isSquare.js');
 matrix.isValidMatrix = require('./functions/isValidMatrix.js');
 
 // Other methods
+matrix.copy = require('./functions/copy.js');
 matrix.getPrecision = require('./functions/precision.js').getPrecision;
 matrix.setPrecision = require('./functions/precision.js').setPrecision;

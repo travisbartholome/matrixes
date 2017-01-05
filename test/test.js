@@ -160,6 +160,33 @@ describe('#add', function() {
   });
 });
 
+describe('#inverse', function() {
+  it('should return the inverse of a square matrix', function() {
+    // Use near-equality
+    assert.equal(equals( matrix.inverse([[1,2,3],[0,1,4],[5,6,0]]), [[-24,18,5],[20,-15,-4],[-5,4,1]], true ), true);
+  });
+
+  it('should not alter the original argument', function() {
+    let startMatrix = [[1,2,3],[0,1,4],[5,6,0]];
+    let inv = matrix.inverse(startMatrix);
+    assert.equal(equals( startMatrix, [[1,2,3],[0,1,4],[5,6,0]] ), true);
+  });
+
+  it.skip('should throw an error if a singular square matrix is passed', function() {
+
+  });
+
+  it('should throw an error if the given matrix is not square', function() {
+    expect(() => matrix.inverse([[1, 2, 3], [1, 2, 3]])).to.throw('Matrix must be square to be inverted');
+  });
+
+  it('should throw an error if the argument is not a valid matrix', function() {
+    for (let i = 0; i < INVALID_MATRICES.length; i++) {
+      expect(() => matrix.inverse(INVALID_MATRICES[i])).to.throw('Invalid matrix');
+    }
+  });
+});
+
 describe('#multiply', function() {
   it('should return the matrix product of two numeric matrices.', function() {
     assert.equal(str(matrix.multiply([[1, 2, 3], [4, 5, 6]], [[1, 2],[3, 4], [5, 6]])), str([[22, 28], [49, 64]]));
@@ -348,6 +375,25 @@ describe('#isValidMatrix', function() {
 
 
 /* Other methods */
+
+describe('#copy', function() {
+  it('should return a deep duplicate of the given matrix', function() {
+    let mat = [[1, 2, 3], [4, 5, 6]];
+    assert.equal(equals(mat, matrix.copy(mat)), true);
+  });
+
+  it('should prevent changes to the new (returned) matrix from affecting the original', function() {
+    let first = [[1, 2], [3, 4]];
+    let second = matrix.copy(first);
+    second[0][0] = 2;
+    assert.equal(first[0][0], 1);
+    assert.equal(second[0][0], 2);
+  });
+
+  it('should throw an error if the argument is not a valid matrix', function() {
+    expect(() => matrix.copy('asdf')).to.throw('Invalid matrix');
+  });
+});
 
 // NOTE: Tests for getPrecision and setPrecision are highly interdependent.
 // Should I work to untangle them?

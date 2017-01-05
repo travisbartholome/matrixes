@@ -40,9 +40,15 @@
 
 - [x] Add a #subtract method.
 
-- [ ] Add a #det(Matrix matrix) method to find the determinant of a given matrix.
+- [x] Add a #inverse method to find the inverse of a matrix.
 
-- [ ] Add a #inverse method to find the inverse of a matrix.
+    * [x] Added a #copy method to allow deep duplication of matrices.
+
+        - Allows the inverse operation to avoid modifying its argument.
+
+- [x] Add docs for #copy and #inverse.
+
+- [ ] Add a #det(Matrix matrix) method to find the determinant of a given matrix.
 
 - [ ] Add a #reduce method. Support both regular and augmented matrices.
 

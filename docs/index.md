@@ -24,6 +24,16 @@ Doesn't alter either argument.
 
 Throws an error if the matrices do not have the same dimensions or if either matrix is invalid.
 
+### matrix.copy(matrix)
+
+- matrix: <Matrix>
+
+Returns a copy of the given matrix.
+Changing this copy will *not* change the original matrix.
+The two will be separate and won't reference each other.
+
+Throws an error if the argument is not a valid matrix.
+
 ### matrix.createMatrix(matrixString)
 
 - matrixString: <String>
@@ -133,6 +143,21 @@ let d = matrix.identity(Infinity);
 // Throws an error.
 
 ```
+
+### matrix.inverse(matrix)
+
+- matrix: <Matrix>
+
+Returns the inverse matrix of the given matrix.
+Does not alter the original argument.
+
+Throws an error if:
+
+- The given matrix is not valid.
+
+- The given matrix is not square (and therefore is not invertible).
+
+- The given matrix is singular (square but not invertible -- the determinant is 0).
 
 ### matrix.is2DArray(matrix)
 
