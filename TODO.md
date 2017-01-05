@@ -48,7 +48,9 @@
 
 - [x] Add docs for #copy and #inverse.
 
-- [ ] Add a #det(Matrix matrix) method to find the determinant of a given matrix.
+- [x] Add a #det(Matrix matrix) method to find the determinant of a given matrix.
+
+- [ ] Optimize #inverse and #det methods?
 
 - [ ] Add a #reduce method. Support both regular and augmented matrices.
 

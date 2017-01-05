@@ -1,7 +1,7 @@
 const isValidMatrix = require('./isValidMatrix.js');
 const isSquare = require('./isSquare.js');
-// Need method for testing if det(matrix) === 0
 
+const det = require('./det.js');
 const identity = require('./identity.js');
 const copy = require('./copy.js');
 
@@ -12,6 +12,7 @@ function almostEquals(numberOne, numberTwo, precision) {
 function inverse(inputMatrix) {
   if (!isValidMatrix(inputMatrix)) throw new Error('Invalid matrix');
   if (!isSquare(inputMatrix)) throw new Error('Matrix must be square to be inverted');
+  if (det(inputMatrix) === 0) throw new Error('Matrix is singular (not invertible)');
 
   // So this doesn't alter the original argument.
   let matrix = copy(inputMatrix);
@@ -36,7 +37,7 @@ function inverse(inputMatrix) {
       }
     }
   }
-  
+
   return output;
 }
 

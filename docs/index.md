@@ -66,6 +66,14 @@ matrixString should fit one of the following patterns:
 
 All of the above options will create the matrix `[[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
 
+### matrix.det(matrix)
+
+- matrix: <Matrix>
+
+Returns the determinant of the given matrix.
+Throws an error if the matrix is not square (because a matrix must be square to take a determinant)
+or if the argument isn't a valid matrix.
+
 ### matrix.equals(matrixOne, matrixTwo [, useNearEquality])
 
 - matrixOne: <Matrix>
@@ -157,7 +165,7 @@ Throws an error if:
 
 - The given matrix is not square (and therefore is not invertible).
 
-- The given matrix is singular (square but not invertible -- the determinant is 0).
+- The given matrix is singular (square but not invertible => the determinant is 0).
 
 ### matrix.is2DArray(matrix)
 

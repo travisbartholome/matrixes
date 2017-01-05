@@ -160,6 +160,23 @@ describe('#add', function() {
   });
 });
 
+describe('#det', function() {
+  it('should return the determinant of a matrix', function() {
+    assert.equal(matrix.det([[1,2],[1,2]]), 0);
+    assert.equal(matrix.det([[1,2],[3,4]]), -2);
+    assert.equal(matrix.det([[1,2,3],[2,2,1],[1,2,1]]), 4);
+    assert.equal(matrix.det([[1,0,1,1],[0,2,1,1],[0,3,0,2],[0,1,1,0]]), 1);
+  });
+
+  it('should throw an error if the matrix is not square', function() {
+    expect(() => matrix.det([[1,2,3],[1,2,3]])).to.throw('Matrix must be square to take a determinant');
+  });
+
+  it('should throw an error if the matrix is invalid', function() {
+    expect(() => matrix.det({})).to.throw('Invalid matrix');
+  });
+});
+
 describe('#inverse', function() {
   it('should return the inverse of a square matrix', function() {
     // Use near-equality
@@ -172,8 +189,8 @@ describe('#inverse', function() {
     assert.equal(equals( startMatrix, [[1,2,3],[0,1,4],[5,6,0]] ), true);
   });
 
-  it.skip('should throw an error if a singular square matrix is passed', function() {
-
+  it('should throw an error if a singular square matrix is passed', function() {
+    expect(() => matrix.inverse([[1,2],[1,2]])).to.throw('Matrix is singular (not invertible)');
   });
 
   it('should throw an error if the given matrix is not square', function() {
