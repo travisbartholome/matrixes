@@ -224,6 +224,45 @@ describe('#multiply', function() {
   });
 });
 
+describe('#reduce', function() {
+  it('should return the reduced row echelon form of a single matrix argument', function() {
+    assert.equal(equals(matrix.reduce([[1, 2],[1, 2]]), [[1, 2],[0, 0]]), true);
+    assert.equal(equals(matrix.reduce([[1, 1, 3], [1, 2, 1]]), [[1, 0, 5],[0, 1, -2]]), true);
+    assert.equal(equals(matrix.reduce([[1, 2, 3],[-1, -2, -3],[2, 4, 6]]), [[1, 2, 3],[0, 0, 0],[0, 0, 0]]), true);
+  });
+
+  it('should throw an error if that single argument is not a valid matrix', function() {
+    expect(() => matrix.reduce([])).to.throw('Invalid matrix');
+  });
+
+  it('should not alter the original argument', function() {
+    let mat = [[1, 2, 3],[1, 2, 3]];
+    let red = matrix.reduce(mat);
+    assert.equal(equals(mat, [[1,2,3],[1,2,3]]), true);
+  });
+});
+
+describe.skip('#reduceAug', function() {
+  // First arg: coeffs. Second arg: solutions.
+  it('should return the RREF of an augmented matrix passed in two parts', function() {
+
+  });
+
+  it('should throw an error if either argument is not a valid matrix', function() {
+    expect(() => matrix.reduceAug('asdf', [[1],[2],[3]])).to.throw('Invalid matrix');
+    expect(() => matrix.reduce([[1, 2],[1, 2]], {})).to.throw('Invalid matrix');
+  });
+
+  it.skip('should be able to handle solution matrices that are *not* just vectors', function() {
+    // I.e., I should be able to pass an identity matrix as the second arg and reduce to find the inverse of a square matrix.
+    // Not sure if I want to make that a feature.
+  });
+
+  it('should not alter either of the original arguments', function() {
+
+  });
+});
+
 describe('#scale', function() {
   it('should multiply each element of the passed matrix by the passed scalar.', function() {
     assert.equal(equals(matrix.scale([[1, 1, 2], [2, 3, 4]], 2), [[2, 2, 4], [4, 6, 8]]), true);

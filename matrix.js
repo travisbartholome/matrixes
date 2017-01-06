@@ -10,6 +10,7 @@ matrix.add = require('./functions/add.js');
 matrix.det = require('./functions/det.js');
 matrix.inverse = require('./functions/inverse.js');
 matrix.multiply = require('./functions/multiply.js');
+matrix.reduce = require('./functions/reduce.js');
 matrix.scale = require('./functions/scale.js');
 matrix.subtract = require('./functions/subtract.js');
 

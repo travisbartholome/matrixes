@@ -241,6 +241,19 @@ Throws an error if either matrix is invalid or if the two matrices cannot be mul
 To be multipliable, `matrixOne` must have dimensions *m x n* and `matrixTwo` must have dimensions *n x p*.
 (For any positive, nonzero integers m, n, and p.)
 
+### matrix.reduce(matrix)
+
+- matrix: <Matrix>
+
+Returns the reduced row echelon form of the given matrix.
+Treats the matrix as if it were a coefficient matrix; i.e., the last column will also be reduced.
+
+You could think of this as reducing the coefficient matrix of a homogeneous system.
+Or just of any system where you're only looking at the coefficients.
+I'm just going to stop typing now.
+
+Throws an error if the argument is not a valid matrix.
+
 ### matrix.scale(matrix, scalar)
 
 - matrix: <Matrix>
