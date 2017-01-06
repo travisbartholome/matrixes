@@ -231,6 +231,14 @@ describe('#reduce', function() {
     assert.equal(equals(matrix.reduce([[1, 2, 3],[-1, -2, -3],[2, 4, 6]]), [[1, 2, 3],[0, 0, 0],[0, 0, 0]]), true);
   });
 
+  it('should support row switching when there is a 0 where we would expect a leading 1', function() {
+    // [[1, 2, 2], [1, 2, 3], [2, 1, 1]] => initial
+    // with row switching => matrix.identity(3)
+    // without switching we get [ [ 1, 2, 0 ], [ 0, 3, 1 ], [ 0, -3, 0 ] ]
+    // which is not technically wrong but it's not fully reduced
+    assert.equal(equals(matrix.reduce([[1, 2, 2], [1, 2, 3], [2, 1, 1]]), matrix.identity(3)), true);
+  });
+
   it('should throw an error if that single argument is not a valid matrix', function() {
     expect(() => matrix.reduce([])).to.throw('Invalid matrix');
   });
