@@ -189,6 +189,10 @@ describe('#inverse', function() {
     assert.equal(equals( startMatrix, [[1,2,3],[0,1,4],[5,6,0]] ), true);
   });
 
+  it('should support row swapping when there is a 0 where we would expect a leading 1', function() {
+    assert.equal(equals(matrix.inverse([[1,2,2],[1,2,3],[2,1,1]]), [[-1/3,0,2/3],[5/3,-1,-1/3],[-1,1,0]], true), true);
+  });
+
   it('should throw an error if a singular square matrix is passed', function() {
     expect(() => matrix.inverse([[1,2],[1,2]])).to.throw('Matrix is singular (not invertible)');
   });
@@ -229,6 +233,16 @@ describe('#reduce', function() {
     assert.equal(equals(matrix.reduce([[1, 2],[1, 2]]), [[1, 2],[0, 0]]), true);
     assert.equal(equals(matrix.reduce([[1, 1, 3], [1, 2, 1]]), [[1, 0, 5],[0, 1, -2]]), true);
     assert.equal(equals(matrix.reduce([[1, 2, 3],[-1, -2, -3],[2, 4, 6]]), [[1, 2, 3],[0, 0, 0],[0, 0, 0]]), true);
+    assert.equal(equals(matrix.reduce([[1,2],[1,3],[2,2]]), [[1,0],[0,1],[0,0]]), true);
+  });
+
+  it('should support row swapping when there is a 0 where we would expect a leading 1', function() {
+    // Without row switching this reduction used to give [ [ 1, 2, 0 ], [ 0, 3, 1 ], [ 0, -3, 0 ] ]
+    assert.equal(equals(matrix.reduce([[1, 2, 2], [1, 2, 3], [2, 1, 1]]), matrix.identity(3)), true);
+  });
+
+  it('should not swap any rows if no swap would give a leading nonzero entry', function() {
+    assert.equal(equals(matrix.reduce([[1,1,1],[0,0,2],[0,0,3]]), [[1,1,0],[0,0,0],[0,0,1]]), true);
   });
 
   it('should throw an error if that single argument is not a valid matrix', function() {
