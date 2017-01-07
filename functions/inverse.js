@@ -31,13 +31,19 @@ function inverse(inputMatrix) {
             let tmpRow = matrix[j].slice(0);
             matrix[j] = matrix[i].slice(0);
             matrix[i] = tmpRow;
+            tmpRow = output[j].slice(0);
+            output[j] = output[i].slice(0);
+            output[i] = tmpRow;
             swapped = true;
             break;
           }
         }
         scalar = swapped ? matrix[i][i] : 1;
+        // `scalar` should never be 1 in #inverse because that would imply a free variable.
+        // (Which would mean that det(matrix) === 0).
       }
       matrix[i] = matrix[i].map(x => x / scalar);
+      output[i] = output[i].map(x => x / scalar);
     }
     // Reduce all other entries in that column to 0. j => row
     // Reduces the rest of the row at the same time.
