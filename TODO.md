@@ -54,11 +54,11 @@
 
     * Actually, you already implemented a general RREF algorithm to make the #inverse method.
 
-    * [ ] #reduce
+    * [x] #reduce
 
     * [ ] #reduceAug
 
-- [ ] Add support in #inverse and #reduce(Aug) for row switching, rows that have all zeros. See test case 1 for #reduce.
+- [x] Add support in #inverse and #reduce(Aug) for row switching, rows that have all zeros. See test case 1 for #reduce.
 
 - [ ] Add an example to the docs for #reduce?
 

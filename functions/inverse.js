@@ -23,6 +23,20 @@ function inverse(inputMatrix) {
     // Get a leading 1 in the given row.
     if (!almostEquals(matrix[i][i], 1, 2e-12)) {
       let scalar = matrix[i][i];
+      // Swap rows if necessary
+      if (scalar === 0) {
+        let swapped = false;
+        for (let j = i; j < matrix.length; j++) {
+          if (matrix[j][i] !== 0) {
+            let tmpRow = matrix[j].slice(0);
+            matrix[j] = matrix[i].slice(0);
+            matrix[i] = tmpRow;
+            swapped = true;
+            break;
+          }
+        }
+        scalar = swapped ? matrix[i][i] : 1;
+      }
       matrix[i] = matrix[i].map(x => x / scalar);
     }
     // Reduce all other entries in that column to 0. j => row
