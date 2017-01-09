@@ -179,7 +179,6 @@ describe('#det', function() {
 
 describe('#inverse', function() {
   it('should return the inverse of a square matrix', function() {
-    // Use near-equality
     assert.equal(equals( matrix.inverse([[1,2,3],[0,1,4],[5,6,0]]), [[-24,18,5],[20,-15,-4],[-5,4,1]], true ), true);
   });
 
@@ -256,15 +255,15 @@ describe('#reduce', function() {
   });
 });
 
-describe.skip('#reduceAug', function() {
+describe('#reduceAug', function() {
   // First arg: coeffs. Second arg: solutions.
-  it('should return the RREF of an augmented matrix passed in two parts', function() {
-
+  it('should return the concatenated RREF of an augmented matrix passed in two parts', function() {
+    assert.equal(equals(matrix.reduceAug([[-2,1],[1,-4]], [[-3],[-2]]), [[1,0,2],[0,1,1]]), true);
   });
 
   it('should throw an error if either argument is not a valid matrix', function() {
     expect(() => matrix.reduceAug('asdf', [[1],[2],[3]])).to.throw('Invalid matrix');
-    expect(() => matrix.reduce([[1, 2],[1, 2]], {})).to.throw('Invalid matrix');
+    expect(() => matrix.reduceAug([[1, 2],[1, 2]], {})).to.throw('Invalid matrix');
   });
 
   it.skip('should be able to handle solution matrices that are *not* just vectors', function() {
@@ -273,7 +272,11 @@ describe.skip('#reduceAug', function() {
   });
 
   it('should not alter either of the original arguments', function() {
-
+    let mat1 = [[1,2],[2,3]];
+    let mat2 = [[1],[1]];
+    let res = matrix.reduceAug(mat1, mat2);
+    assert.equal(equals(mat1, [[1,2],[2,3]]), true);
+    assert.equal(equals(mat2, [[1],[1]]), true);
   });
 });
 
