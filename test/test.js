@@ -119,23 +119,25 @@ describe('#zeros', function() {
   });
 
   it('should throw an error for all non-integer arguments.', function() {
-    expect(() => matrix.zeros(1.23, 3)).to.throw('Invalid matrix size: both row size and column size must be an integer');
-    expect(() => matrix.zeros(2, 3.212)).to.throw('Invalid matrix size: both row size and column size must be an integer');
-    expect(() => matrix.zeros('2', 3)).to.throw('Invalid matrix size: both row size and column size must be an integer');
-    expect(() => matrix.zeros(Infinity, 3)).to.throw('Invalid matrix size: both row size and column size must be an integer');
-    expect(() => matrix.zeros(2, -Infinity)).to.throw('Invalid matrix size: both row size and column size must be an integer');
-    expect(() => matrix.zeros(NaN, 3)).to.throw('Invalid matrix size: both row size and column size must be an integer');
-    expect(() => matrix.zeros(2, 'asdf')).to.throw('Invalid matrix size: both row size and column size must be an integer');
-    expect(() => matrix.zeros([], 3)).to.throw('Invalid matrix size: both row size and column size must be an integer');
-    expect(() => matrix.zeros(2, {})).to.throw('Invalid matrix size: both row size and column size must be an integer');
+    let integerSizeError = 'Invalid matrix size: both row size and column size must be an integer';
+    expect(() => matrix.zeros(1.23, 3)).to.throw(integerSizeError);
+    expect(() => matrix.zeros(2, 3.212)).to.throw(integerSizeError);
+    expect(() => matrix.zeros('2', 3)).to.throw(integerSizeError);
+    expect(() => matrix.zeros(Infinity, 3)).to.throw(integerSizeError);
+    expect(() => matrix.zeros(2, -Infinity)).to.throw(integerSizeError);
+    expect(() => matrix.zeros(NaN, 3)).to.throw(integerSizeError);
+    expect(() => matrix.zeros(2, 'asdf')).to.throw(integerSizeError);
+    expect(() => matrix.zeros([], 3)).to.throw(integerSizeError);
+    expect(() => matrix.zeros(2, {})).to.throw(integerSizeError);
   });
 
   it('should throw an error if the argument is <= 0.', function() {
-    expect(() => matrix.zeros(0, 3)).to.throw('Invalid matrix size: both row size and column size must be greater than 0');
-    expect(() => matrix.zeros(2, -1)).to.throw('Invalid matrix size: both row size and column size must be greater than 0');
-    expect(() => matrix.zeros(-2, 0)).to.throw('Invalid matrix size: both row size and column size must be greater than 0');
-    expect(() => matrix.zeros(0, 0)).to.throw('Invalid matrix size: both row size and column size must be greater than 0');
-    expect(() => matrix.zeros(0, -3)).to.throw('Invalid matrix size: both row size and column size must be greater than 0');
+    let nonzeroSizeError = 'Invalid matrix size: both row size and column size must be greater than 0';
+    expect(() => matrix.zeros(0, 3)).to.throw(nonzeroSizeError);
+    expect(() => matrix.zeros(2, -1)).to.throw(nonzeroSizeError);
+    expect(() => matrix.zeros(-2, 0)).to.throw(nonzeroSizeError);
+    expect(() => matrix.zeros(0, 0)).to.throw(nonzeroSizeError);
+    expect(() => matrix.zeros(0, -3)).to.throw(nonzeroSizeError);
   });
 });
 
@@ -266,9 +268,13 @@ describe('#reduceAug', function() {
     expect(() => matrix.reduceAug([[1, 2],[1, 2]], {})).to.throw('Invalid matrix');
   });
 
-  it.skip('should be able to handle solution matrices that are *not* just vectors', function() {
-    // I.e., I should be able to pass an identity matrix as the second arg and reduce to find the inverse of a square matrix.
-    // Not sure if I want to make that a feature.
+  it('should be able to handle solution matrices that are *not* just vectors', function() {
+    assert.equal(equals(matrix.reduceAug([[0,1,1],[1,3,3]], [[1,2],[3,4]]), [[1,0,0,0,-2],[0,1,1,1,2]]), true);
+    // Next case is equivalent to finding an inverse.
+    matrix.setPrecision(2e-12);
+    assert.equal(equals(matrix.reduceAug([[3,0,2],[2,0,-2],[0,1,1]], matrix.identity(3)),
+      [[1,0,0,0.2,0.2,0],[0,1,0,-0.2,0.3,1],[0,0,1,0.2,-0.3,0]],
+    true), true);
   });
 
   it('should not alter either of the original arguments', function() {

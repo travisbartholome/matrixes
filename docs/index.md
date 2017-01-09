@@ -254,6 +254,30 @@ I'm just going to stop typing now.
 
 Throws an error if the argument is not a valid matrix.
 
+### matrix.reduceAug(coefficients, solutions)
+
+- coefficients: <Matrix>
+- solutions: <Matrix>
+
+Returns the augmented matrix made by adjoining `coefficients` and `solutions`, then reducing.
+Note that `solutions` does not necessarily have to be a vector.
+For example, it could be an identity matrix, and you could reduce to find an inverse using #reduceAug.
+
+Concatenation occurs as follows:
+
+```javascript
+
+[[1,2],[3,4]] + [[0],[0]] => [[1,2,0],[3,4,0]];
+
+/* Equivalent to the following augmented matrix:
+
+(1 2 | 0)
+(3 4 | 0)
+
+*/
+
+```
+
 ### matrix.scale(matrix, scalar)
 
 - matrix: <Matrix>

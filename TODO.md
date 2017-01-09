@@ -50,13 +50,13 @@
 
 - [x] Add a #det(Matrix matrix) method to find the determinant of a given matrix.
 
-- [ ] Add #reduce methods. Support both regular and augmented matrices.
+- [x] Add #reduce methods. Support both regular and augmented matrices.
 
     * Actually, you already implemented a general RREF algorithm to make the #inverse method.
 
     * [x] #reduce
 
-    * [ ] #reduceAug
+    * [x] #reduceAug
 
 - [x] Add support in #inverse and #reduce(Aug) for row switching, rows that have all zeros. See test case 1 for #reduce.
 
