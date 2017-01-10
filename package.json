@@ -15,8 +15,8 @@
   },
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/travisbartholome/matrix-ops.git"
+    "type": "git",
+    "url": "https://github.com/travisbartholome/matrix-ops.git"
   },
   "bugs": {
     "url": "https://github.com/travisbartholome/matrix-ops/issues"
