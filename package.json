@@ -1,6 +1,6 @@
 {
   "name": "matrix-ops",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Performs mathematical matrix operations using 2D arrays (arrays of arrays).",
   "main": "matrix.js",
   "directories": {
