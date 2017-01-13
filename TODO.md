@@ -60,7 +60,7 @@
 
 - [x] Add support in #inverse and #reduce(Aug) for row switching, rows that have all zeros. See test case 1 for #reduce.
 
-- [ ] Add an example to the docs for #reduce?
+- [x] Add an example to the docs for #reduce?
 
 - [ ] Consider using #reduce inside #inverse somehow so you aren't repeating code?
 

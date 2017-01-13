@@ -245,7 +245,7 @@ To be multipliable, `matrixOne` must have dimensions *m x n* and `matrixTwo` mus
 
 - matrix: <Matrix>
 
-Returns the reduced row echelon form of the given matrix.
+Returns the reduced row echelon form (RREF) of the given matrix.
 Treats the matrix as if it were a coefficient matrix; i.e., the last column will also be reduced.
 
 You could think of this as reducing the coefficient matrix of a homogeneous system.
@@ -253,6 +253,18 @@ Or just of any system where you're only looking at the coefficients.
 I'm just going to stop typing now.
 
 Throws an error if the argument is not a valid matrix.
+
+Here's an example of using `matrix.reduce`:
+
+```javascript
+
+let A = matrix.createMatrix("1 2 3, 0 1 1, 1 2 3");
+
+let reduced = matrix.reduce(A);
+console.log(reduced); // => [ [1, 0, 1], [0, 1, 1], [0, 0, 0] ]
+// reduced is the RREF of matrix A.
+
+```
 
 ### matrix.reduceAug(coefficients, solutions)
 
@@ -262,6 +274,18 @@ Throws an error if the argument is not a valid matrix.
 Returns the augmented matrix made by adjoining `coefficients` and `solutions`, then reducing.
 Note that `solutions` does not necessarily have to be a vector.
 For example, it could be an identity matrix, and you could reduce to find an inverse using #reduceAug.
+
+Here's an example of using `matrix.reduceAug`:
+
+```javascript
+
+let coeffs = matrix.createMatrix("-2 1, 1 -4");
+let solutions = matrix.createMatrix("-3, -2");
+
+let reduced = matrix.reduceAug(coeffs, solutions);
+console.log(reduced); // => [ [1, 0, 2], [0, 1, 1] ]
+
+```
 
 Concatenation occurs as follows:
 
