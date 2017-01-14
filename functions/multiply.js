@@ -1,6 +1,6 @@
 const isValidMatrix = require('./isValidMatrix.js');
 
-function matrixMult(A, B) {
+function multiply(A, B) {
   if (!isValidMatrix(A) || !isValidMatrix(B)) {
     throw new Error('Invalid matrix');
   }
@@ -27,4 +27,4 @@ function matrixMult(A, B) {
   return result;
 }
 
-module.exports = matrixMult;
+module.exports = multiply;
