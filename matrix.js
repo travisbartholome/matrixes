@@ -1,22 +1,102 @@
-/* Considering the pattern function name(args) { ... }; Matrix.name = name; */
+/** Following this pattern for adding methods:
+ * function name(args) { ... };
+ * Matrix.name = name;
+ */
+
 const Matrix = module.exports;
 
-const isValidMatrix = require('./functions/isValidMatrix.js');
-const copy = require('./functions/copy.js');
-const isRectangular = require('./functions/isRectangular.js');
-const isSquare = require('./functions/isSquare.js');
+/* Helper methods and assertion functions */
 
 function almostEquals(numberOne, numberTwo, precision) {
   return Math.abs(numberOne - numberTwo) <= precision;
 }
 
-/* Helper methods and assertion functions */
-Matrix.getPrecision = require('./functions/precision.js').getPrecision;
-Matrix.setPrecision = require('./functions/precision.js').setPrecision;
-Matrix.is2DArray = require('./functions/is2DArray.js');
-Matrix.isRectangular = require('./functions/isRectangular.js');
+function is2DArray(matrix) {
+  if (!matrix || !Array.isArray(matrix)) return false;
+  if (matrix.length === 0) return false; // Handles matrix === []
+  for (let i = 0; i < matrix.length; i++) {
+    if (!Array.isArray(matrix[i])) return false;
+    for (let j = 0; j < matrix[i].length; j++) {
+      // TODO: Does this catch all desired cases?
+      if (typeof matrix[i][j] === 'object') return false;
+    }
+  }
+  return true;
+}
+Matrix.is2DArray = is2DArray;
+
+// --
+
+function isRectangular(matrix) {
+  if (!is2DArray(matrix)) return false;
+  let rowLength = matrix[0].length;
+  for (var i = 0; i < matrix.length; i++) {
+    if (matrix[i].length !== rowLength) {
+      return false;
+    }
+  }
+  return true;
+}
+Matrix.isRectangular = isRectangular;
+
+// --
+
+function isValidMatrix(matrix) {
+  if (!is2DArray(matrix)) return false;
+  if (!isRectangular(matrix)) return false;
+
+  if (matrix.length === 0) return false;
+  for (let i = 0; i < matrix.length; i++) {
+    if (matrix[i].length === 0) return false;
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (typeof matrix[i][j] !== 'number') return false;
+      if (isNaN(matrix[i][j])) return false;
+      if (!isFinite(matrix[i][j])) return false;
+    }
+  }
+
+  return true;
+}
+Matrix.isValidMatrix = isValidMatrix;
+
+// --
+
+function isSquare(matrix) {
+  if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
+  return isRectangular(matrix) && matrix.length === matrix[0].length;
+}
 Matrix.isSquare = require('./functions/isSquare.js');
-Matrix.isValidMatrix = require('./functions/isValidMatrix.js');
+
+// --
+
+const precision = (function() {
+  let precision = 2e-15;
+  return {
+    getPrecision: function() {
+      return precision;
+    },
+    setPrecision: function(newPrecision) {
+      if (newPrecision === 'default') {
+        precision = 2e-15;
+        return precision;
+      } else if (typeof newPrecision !== 'number' || !isFinite(newPrecision) || isNaN(newPrecision)) {
+        throw new Error('Input to setPrecision must be a finite number or "default"');
+      } else {
+        precision = newPrecision;
+        return precision;
+      }
+    }
+  };
+})();
+Matrix.getPrecision = precision.getPrecision;
+Matrix.setPrecision = precision.setPrecision;
+
+// --
+
+function copy(matrix) {
+  if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
+  return matrix.map(row => row.slice(0));
+}
 Matrix.copy = require('./functions/copy.js');
 
 /* Methods */
@@ -108,7 +188,7 @@ function equals(matrixOne, matrixTwo, useNearEquality) {
     for (let j = 0; j < matrixOne[0].length; j++) {
       if (matrixOne[i][j] !== matrixTwo[i][j]) {
         if (typeof useNearEquality === 'boolean' && useNearEquality) {
-          if (almostEquals(matrixOne[i][j], matrixTwo[i][j], Matrix.getPrecision())) return true;
+          if (almostEquals(matrixOne[i][j], matrixTwo[i][j], Matrix.getPrecision())) return true; // TODO: Just use getPrecision()
         }
         return false;
       }
@@ -276,7 +356,7 @@ Matrix.reduce = reduce;
 function reduceAug(inputOne, inputTwo) {
   if (!isValidMatrix(inputOne) || !isValidMatrix(inputTwo)) throw new Error('Invalid matrix');
   let matrix = copy(inputOne).map((row, index) => row.concat(inputTwo[index].slice(0)));
-  return Matrix.reduce(matrix);
+  return reduce(matrix);
 }
 Matrix.reduceAug = reduceAug;
 
