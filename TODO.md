@@ -62,19 +62,19 @@
 
 - [x] Add an example to the docs for #reduce?
 
-- [ ] Consider using #reduce inside #inverse somehow so you aren't repeating code?
-
-- [ ] Optimize #inverse and #det methods?
-
-- [ ] Try to DRY up the tests a little bit when testing things like error handling and invalid arguments.
-
-- [ ] Refactor so that all functions are in matrix.js.
+- [x] Refactor so that all functions are in matrix.js.
 
     * Definitely change the version if/when you do this, just for practice if nothing else.
 
     * Avoids having to `require` the assertion functions to validate input, etc.
 
     * Keep assertion methods user-accessible somehow.
+
+- [ ] Consider using #reduce inside #inverse somehow so you aren't repeating code?
+
+- [ ] Optimize #inverse and #det methods?
+
+- [ ] Try to DRY up the tests a little bit when testing things like error handling and invalid arguments.
 
 - [ ] Consider adding methods that alter the argument in place.
 
