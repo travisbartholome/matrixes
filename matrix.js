@@ -1,3 +1,4 @@
+/* Considering the pattern function name(args) { ... }; Matrix.name = name; */
 const Matrix = module.exports;
 
 const isValidMatrix = require('./functions/isValidMatrix.js');
@@ -18,9 +19,9 @@ Matrix.isSquare = require('./functions/isSquare.js');
 Matrix.isValidMatrix = require('./functions/isValidMatrix.js');
 Matrix.copy = require('./functions/copy.js');
 
-// --
+/* Methods */
 
-Matrix.add = function add(matrixOne, matrixTwo) {
+function add(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
     throw new Error('Invalid matrix');
   }
@@ -38,10 +39,11 @@ Matrix.add = function add(matrixOne, matrixTwo) {
   }
   return output;
 }
+Matrix.add = add;
 
 // --
 
-Matrix.createMatrix = function createMatrix(input) {
+function createMatrix(input) {
   if (typeof input !== 'string') throw new Error('Input to createMatrix must be a string');
 
   let matrix = input.replace(/, /g, ',').split(',').map(function(string) {
@@ -62,10 +64,11 @@ Matrix.createMatrix = function createMatrix(input) {
 
   return matrix;
 }
+Matrix.createMatrix = createMatrix;
 
 // --
 
-Matrix.det = function det(matrix) {
+function det(matrix) {
   if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
   if (!isSquare(matrix)) throw new Error('Matrix must be square to take a determinant');
 
@@ -91,11 +94,11 @@ Matrix.det = function det(matrix) {
     return output;
   }
 }
-const det = Matrix.det;
+Matrix.det = det;
 
 // --
 
-Matrix.equals = function(matrixOne, matrixTwo, useNearEquality) {
+function equals(matrixOne, matrixTwo, useNearEquality) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) throw new Error('Invalid matrix');
 
   if (matrixOne.length !== matrixTwo.length) return false;
@@ -114,10 +117,11 @@ Matrix.equals = function(matrixOne, matrixTwo, useNearEquality) {
 
   return true;
 }
+Matrix.equals = equals;
 
 // --
 
-Matrix.identity = function(size) {
+function identity(size) {
   if (!Number.isInteger(size)) {
     throw new Error('Invalid matrix size: must be an integer');
   }
@@ -140,11 +144,11 @@ Matrix.identity = function(size) {
   }
   return matrix;
 }
-const identity = Matrix.identity;
+Matrix.identity = identity;
 
 // --
 
-Matrix.inverse = function(inputMatrix) {
+function inverse(inputMatrix) {
   if (!isValidMatrix(inputMatrix)) throw new Error('Invalid matrix');
   if (!isSquare(inputMatrix)) throw new Error('Matrix must be square to be inverted');
   if (det(inputMatrix) === 0) throw new Error('Matrix is singular (not invertible)');
@@ -195,28 +199,29 @@ Matrix.inverse = function(inputMatrix) {
 
   return output;
 }
+Matrix.inverse = inverse;
 
 // --
 
-Matrix.multiply = function(A, B) {
-  if (!isValidMatrix(A) || !isValidMatrix(B)) {
+function multiply(matrixOne, matrixTwo) {
+  if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
     throw new Error('Invalid matrix');
   }
 
   // Check if the matrices can be legally multiplied (mathematically speaking).
-  if (A[0].length !== B.length) {
+  if (matrixOne[0].length !== matrixTwo.length) {
     throw new Error('Cannot multiply: matrices must be of sizes m x n and n x p to produce a valid answer');
   }
 
   // Multiply matrices.
   let result = [];
   let row, entry;
-  for (let k = 0; k < A.length; k++) {
+  for (let k = 0; k < matrixOne.length; k++) {
     row = [];
-    for (let j = 0; j < B[0].length; j++) {
+    for (let j = 0; j < matrixTwo[0].length; j++) {
       entry = 0;
-      for (let i = 0; i < A[0].length; i++) {
-        entry += A[k][i] * B[i][j];
+      for (let i = 0; i < matrixOne[0].length; i++) {
+        entry += matrixOne[k][i] * matrixTwo[i][j];
       }
       row.push(entry);
     }
@@ -224,10 +229,11 @@ Matrix.multiply = function(A, B) {
   }
   return result;
 }
+Matrix.multiply = multiply;
 
 // --
 
-Matrix.reduce = function(inputMatrix) {
+function reduce(inputMatrix) {
   if (!isValidMatrix(inputMatrix)) throw new Error('Invalid matrix');
   let matrix = copy(inputMatrix);
   let size = Math.min(matrix.length, matrix[0].length);
@@ -263,18 +269,20 @@ Matrix.reduce = function(inputMatrix) {
   }
   return matrix;
 }
+Matrix.reduce = reduce;
 
 // --
 
-Matrix.reduceAug = function(inputOne, inputTwo) {
+function reduceAug(inputOne, inputTwo) {
   if (!isValidMatrix(inputOne) || !isValidMatrix(inputTwo)) throw new Error('Invalid matrix');
   let matrix = copy(inputOne).map((row, index) => row.concat(inputTwo[index].slice(0)));
   return Matrix.reduce(matrix);
 }
+Matrix.reduceAug = reduceAug;
 
 // --
 
-Matrix.scale = function(matrix, scalar) {
+function scale(matrix, scalar) {
   if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
 
   if (typeof scalar !== 'number' || isNaN(scalar) || !isFinite(scalar)) {
@@ -293,10 +301,11 @@ Matrix.scale = function(matrix, scalar) {
 
   return newMatrix;
 }
+Matrix.scale = scale;
 
 // --
 
-Matrix.subtract = function(matrixOne, matrixTwo) {
+function subtract(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
     throw new Error('Invalid matrix');
   }
@@ -314,10 +323,11 @@ Matrix.subtract = function(matrixOne, matrixTwo) {
   }
   return output;
 }
+Matrix.subtract = subtract;
 
 // --
 
-Matrix.zeros = function(numRows, numColumns) {
+function zeros(numRows, numColumns) {
   if (!Number.isInteger(numRows) || !Number.isInteger(numColumns)) {
     // Consider using Number.isSafeInteger here.
     throw new Error('Invalid matrix size: both row size and column size must be an integer');
@@ -337,3 +347,4 @@ Matrix.zeros = function(numRows, numColumns) {
   }
   return matrix;
 }
+Matrix.zeros = zeros;

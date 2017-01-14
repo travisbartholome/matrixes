@@ -14,7 +14,6 @@ function equals(matrixOne, matrixTwo, useNearEquality) {
   for (let i = 0; i < matrixOne.length; i++) {
     for (let j = 0; j < matrixOne[0].length; j++) {
       if (matrixOne[i][j] !== matrixTwo[i][j]) {
-        // TODO: Allow user to set default precision for these calculations, then use that set precision in this function.
         if (typeof useNearEquality === 'boolean' && useNearEquality) {
           if (almostEqual(matrixOne[i][j], matrixTwo[i][j], getPrecision())) return true;
         }
