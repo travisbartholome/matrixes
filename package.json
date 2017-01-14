@@ -1,5 +1,5 @@
 {
-  "name": "matrix-ops",
+  "name": "matrixes",
   "version": "1.0.2",
   "description": "Performs mathematical matrix operations using 2D arrays (arrays of arrays).",
   "keywords": [
