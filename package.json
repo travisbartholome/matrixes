@@ -1,6 +1,6 @@
 {
   "name": "matrixes",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Performs mathematical matrix operations using 2D arrays (arrays of arrays).",
   "keywords": [
     "matrix",
