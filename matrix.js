@@ -233,51 +233,12 @@ function inverse(inputMatrix) {
   if (!isSquare(inputMatrix)) throw new Error('Matrix must be square to be inverted');
   if (det(inputMatrix) === 0) throw new Error('Matrix is singular (not invertible)');
 
-  // So this doesn't alter the original argument.
-  let matrix = copy(inputMatrix);
-  let size = matrix.length;
+  let size = inputMatrix.length;
+  let id = identity(size);
+  let matrix = inputMatrix.map((row, index) => row.concat(id[index]));
 
-  let output = identity(size);
-  for (let i = 0; i < size; i++) {
-    // Get a leading 1 in the given row.
-    if (!almostEquals(matrix[i][i], 1, 2e-12)) {
-      let scalar = matrix[i][i];
-      // Swap rows if necessary
-      if (scalar === 0) {
-        let swapped = false;
-        for (let j = i; j < matrix.length; j++) {
-          if (matrix[j][i] !== 0) {
-            let tmpRow = matrix[j].slice(0);
-            matrix[j] = matrix[i].slice(0);
-            matrix[i] = tmpRow;
-            tmpRow = output[j].slice(0);
-            output[j] = output[i].slice(0);
-            output[i] = tmpRow;
-            swapped = true;
-            break;
-          }
-        }
-        scalar = swapped ? matrix[i][i] : 1;
-        // `scalar` should never be 1 in #inverse because that would imply a free variable.
-        // (Which would mean that det(matrix) === 0).
-      }
-      matrix[i] = matrix[i].map(x => x / scalar);
-      output[i] = output[i].map(x => x / scalar);
-    }
-    // Reduce all other entries in that column to 0. j => row
-    // Reduces the rest of the row at the same time.
-    for (let j = 0; j < size; j++) {
-      if (j === i) continue; // Skip the row we just scaled (newest leading 1).
-      let scalar = matrix[j][i];
-      // k => column
-      for (let k = 0; k < size; k++) {
-        matrix[j][k] -= scalar * matrix[i][k];
-        output[j][k] -= scalar * output[i][k];
-      }
-    }
-  }
-
-  return output;
+  let reduced = reduce(matrix);
+  return reduced.map(row => row.slice(size));
 }
 Matrix.inverse = inverse;
 
