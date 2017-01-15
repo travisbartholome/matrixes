@@ -70,7 +70,15 @@
 
     * Keep assertion methods user-accessible somehow.
 
-- [ ] Consider using #reduce inside #inverse somehow so you aren't repeating code?
+- [x] Consider using #reduce inside #inverse somehow so you aren't repeating code?
+
+- [x] Create a /example directory with example scripts.
+
+- [ ] Add more example scripts.
+
+- [ ] Add a #solve method.
+
+- [ ] Allow add, subtract, and multiply to take any number of arguments?
 
 - [ ] Optimize #inverse and #det methods?
 
@@ -95,8 +103,6 @@
         3. `assert.equal(equals(matrix.createMatrix('9/8, 1/2, 3/4'), [[1.125],[0.5],[0.75]]), true);`
 
 - [ ] Generate table of contents for the documentation (with internal links).
-
-- [ ] Create a /example directory with example scripts.
 
 - [ ] Consider populating the package.json `directories` property more fully. See https://docs.npmjs.com/files/package.json.
 
