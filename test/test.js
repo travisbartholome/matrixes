@@ -309,6 +309,38 @@ describe('#scale', function() {
   });
 });
 
+describe('#solve', function() {
+  it.skip('should expect the system to have two arguments, a coefficient matrix and a solution vector', function() {
+    // Should this really be a test?
+  });
+
+  it('should return an array of solutions to the given system', function() {
+    matrix.setPrecision(2e-12);
+
+    let coeffsOne = [[1,1],[0.09,0.11]];
+    let solOne = [[12000],[1180]];
+    let varValuesOne = [7000, 5000];
+    // HACK: Probably shouldn't try to use #equals here.
+    // Maybe bring in that almostEquals function?
+    // Near-equality is my main reason for using #equals in the first place.
+    assert.equal(equals([matrix.solve(coeffsOne, solOne)], [varValuesOne], true), true);
+
+    let coeffsTwo = [[3,-1,1],[2,-4,-1],[6,8,1]];
+    let solTwo = [[-10],[20],[-100]];
+    let varValuesTwo = [-6, -8, 0];
+    assert.equal(equals([matrix.solve(coeffsTwo, solTwo)], [varValuesTwo], true), true);
+  });
+
+  it('should throw an error if either argumment is not a valid matrix', function() {
+    expect(() => matrix.solve({}, [[1],[2]])).to.throw('Invalid matrix');
+    expect(() => matrix.solve([[1,2],[3,4]], x=>3*x)).to.throw('Invalid matrix');
+  });
+
+  it.skip('should throw an error if the "solution" argument is not in vector form', function() {
+
+  });
+});
+
 describe('#subtract', function() {
   it('should return the difference of the first and second matrices', function() {
     assert.equal(equals(matrix.subtract([[1, 2, 3],[4, 5, 6]], [[0, -1, 2],[3, -4, -5]]), [[1, 3, 1],[1, 9, 11]]), true);

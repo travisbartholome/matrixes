@@ -346,6 +346,15 @@ Matrix.scale = scale;
 
 // --
 
+function solve(coeffs, solutions) {
+  if (!isValidMatrix(coeffs) || !isValidMatrix(solutions)) {
+    throw new Error('Invalid matrix');
+  }
+  let reduced = reduceAug(coeffs, solutions);
+  return reduced.map(row => row[row.length - 1]);
+}
+Matrix.solve = solve;
+
 function subtract(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
     throw new Error('Invalid matrix');

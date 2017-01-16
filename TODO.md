@@ -74,9 +74,15 @@
 
 - [x] Create a /example directory with example scripts.
 
-- [ ] Add more example scripts.
+- [x] Add a #solve method.
 
-- [ ] Add a #solve method.
+- [ ] Add documentation for #solve.
+
+- [ ] Update `solving.js` example script to use #solve.
+
+- [ ] Fix #equals hack in the tests for #solve.
+
+- [ ] Add more example scripts.
 
 - [ ] Allow add, subtract, and multiply to take any number of arguments?
 
