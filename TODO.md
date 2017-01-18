@@ -58,6 +58,8 @@
 
     * [x] #reduceAug
 
+### v1.0.1
+
 - [x] Add support in #inverse and #reduce(Aug) for row switching, rows that have all zeros. See test case 1 for #reduce.
 
 - [x] Add an example to the docs for #reduce?
@@ -69,6 +71,8 @@
     * Avoids having to `require` the assertion functions to validate input, etc.
 
     * Keep assertion methods user-accessible somehow.
+
+### Published v1.0.3
 
 - [x] Consider using #reduce inside #inverse somehow so you aren't repeating code?
 
@@ -87,6 +91,8 @@
 - [ ] Allow add, subtract, and multiply to take any number of arguments?
 
 - [ ] Optimize #inverse and #det methods?
+
+- [ ] Consider moving completed items in TODO to a CHANGELOG file.
 
 - [ ] Try to DRY up the tests a little bit when testing things like error handling and invalid arguments.
 
