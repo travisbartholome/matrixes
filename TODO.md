@@ -82,7 +82,14 @@
 
 - [x] Update `solving.js` example script to use #solve.
 
-- [ ] Add documentation for #solve.
+- [x] Add documentation for #solve.
+
+- [ ] Test possible dimension errors in #reduceAug.
+
+    * What happens when I concatenate two matrices that shouldn't be concatenated?
+    That is, they wouldn't form a nice augmented matrix.
+
+    * For example, [[1,2],[3,4]] and [[1,2]]
 
 - [ ] Fix #equals hack in the tests for #solve.
 

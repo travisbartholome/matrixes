@@ -323,6 +323,37 @@ Calling `matrixes.setPrecision("default")` sets the precision level to 2e-15.
 
 `newPrecision` must be either the string "default" or a finite number (not NaN).
 
+### matrixes.solve(coefficients, solutions)
+
+- coefficients: <Matrix>
+- solutions: <Matrix> : should be a 1-by-n or n-by-1 matrix (a vector)
+
+Returns an array of the solutions to the given system of equations.
+The system is represented by the augmented matrix formed with the `coefficients`
+matrix on one side and the `solutions` vector on the other.
+
+See the example script `solving.js` to see this function in action.
+That script essentially shows the following:
+
+```javascript
+
+/* The following system of equations:
+-2*x + y = -3
+x - 4*y = -2
+
+Becomes this augmented matrix:
+(-2 1 | -3)
+(1 -4 | -2)
+
+*/
+
+let coeffs = [[-2,1],[1,-4]];
+let solns = [[-3],[-2]]; // Column vector
+
+console.log(matrixes.solve(coeffs, solns)); // => [ 2 , 1 ]
+
+```
+
 ### matrixes.subtract(matrixOne, matrixTwo)
 
 - matrixOne: <Matrix>
