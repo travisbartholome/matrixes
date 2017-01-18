@@ -328,20 +328,23 @@ describe('#solve', function() {
   });
 
   it('should return an array of solutions to the given system', function() {
-    matrix.setPrecision(2e-12);
+    let precision = 2e-12;
 
     let coeffsOne = [[1,1],[0.09,0.11]];
     let solOne = [[12000],[1180]];
     let varValuesOne = [7000, 5000];
-    // HACK: Probably shouldn't try to use #equals here.
-    // Maybe bring in that almostEquals function?
-    // Near-equality is my main reason for using #equals in the first place.
-    assert.equal(equals([matrix.solve(coeffsOne, solOne)], [varValuesOne], true), true);
+    let answerOne = matrix.solve(coeffsOne, solOne);
+    for (let i = 0; i < answerOne.length; i++) {
+      assert.equal(almostEquals(answerOne[i], varValuesOne[i], precision), true);
+    }
 
     let coeffsTwo = [[3,-1,1],[2,-4,-1],[6,8,1]];
     let solTwo = [[-10],[20],[-100]];
     let varValuesTwo = [-6, -8, 0];
-    assert.equal(equals([matrix.solve(coeffsTwo, solTwo)], [varValuesTwo], true), true);
+    let answerTwo = matrix.solve(coeffsTwo, solTwo);
+    for (let i = 0; i < answerTwo.length; i++) {
+      assert.equal(almostEquals(answerTwo[i], varValuesTwo[i], precision), true);
+    }
   });
 
   it('should throw an error if the arguments do not have the same number of rows', function() {

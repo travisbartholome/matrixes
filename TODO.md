@@ -91,7 +91,7 @@
 
     * For example, [[1,2],[3,4]] and [[1,2]]
 
-- [ ] Fix #equals hack in the tests for #solve.
+- [x] Fix #equals hack in the tests for #solve.
 
 - [ ] Add a method to generate a random matrix (between 0 and 1, I guess?).
 
