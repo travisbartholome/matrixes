@@ -76,9 +76,9 @@
 
 - [x] Add a #solve method.
 
-- [ ] Add documentation for #solve.
+- [x] Update `solving.js` example script to use #solve.
 
-- [ ] Update `solving.js` example script to use #solve.
+- [ ] Add documentation for #solve.
 
 - [ ] Fix #equals hack in the tests for #solve.
 

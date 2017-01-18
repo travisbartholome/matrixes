@@ -9,6 +9,11 @@ chai.should(); // Do I need this?
 // Test module
 const matrix = require('../matrix.js');
 
+// Used to test near-equality
+function almostEquals(numberOne, numberTwo, precision) {
+  return Math.abs(numberOne - numberTwo) <= precision;
+}
+
 // Shorthand methods
 const str = JSON.stringify;
 const equals = matrix.equals;
