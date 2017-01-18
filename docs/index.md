@@ -14,7 +14,7 @@ It's been my first real foray into TDD, which seems to be working fairly well.
 
 # Documentation
 
-### matrix.add(matrixOne, matrixTwo)
+### matrixes.add(matrixOne, matrixTwo)
 
 - matrixOne: <Matrix>
 - matrixTwo: <Matrix>
@@ -24,7 +24,7 @@ Doesn't alter either argument.
 
 Throws an error if the matrices do not have the same dimensions or if either matrix is invalid.
 
-### matrix.copy(matrix)
+### matrixes.copy(matrix)
 
 - matrix: <Matrix>
 
@@ -34,7 +34,7 @@ The two will be separate and won't reference each other.
 
 Throws an error if the argument is not a valid matrix.
 
-### matrix.createMatrix(matrixString)
+### matrixes.createMatrix(matrixString)
 
 - matrixString: <String>
 
@@ -51,7 +51,7 @@ For example, the following code creates a valid matrix:
 ```javascript
 
 let matrixString = '9/8 4/5, 1 3.00, 1e3 (4-2)*(-1)';
-let result = matrix.createMatrix(matrixString);
+let result = matrixes.createMatrix(matrixString);
 console.log(result); // => [[1.125, 0.8], [1, 3], [1000, -2]]
 
 ```
@@ -66,7 +66,7 @@ matrixString should fit one of the following patterns:
 
 All of the above options will create the matrix `[[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
 
-### matrix.det(matrix)
+### matrixes.det(matrix)
 
 - matrix: <Matrix>
 
@@ -74,7 +74,7 @@ Returns the determinant of the given matrix.
 Throws an error if the matrix is not square (because a matrix must be square to take a determinant)
 or if the argument isn't a valid matrix.
 
-### matrix.equals(matrixOne, matrixTwo [, useNearEquality])
+### matrixes.equals(matrixOne, matrixTwo [, useNearEquality])
 
 - matrixOne: <Matrix>
 - matrixTwo: <Matrix>
@@ -95,8 +95,8 @@ By default, if `useNearEquality` is true, entries can differ by up to 2e-15 and 
 That threshold is arbitrary, but it's roughly one order of magnitude higher than the typical tolerance of ===.
 This compensates for the fact that many operations on floating-point numbers will introduce an error larger than what JavaScript === will allow.
 
-The user can set a new level of precision/tolerance for near-equality using `matrix.setPrecision`.
-The user can also call `matrix.getPrecision` to return the current precision level.
+The user can set a new level of precision/tolerance for near-equality using `matrixes.setPrecision`.
+The user can also call `matrixes.getPrecision` to return the current precision level.
 
 `useNearEquality` defaults to `false`if not specified.
 
@@ -106,28 +106,28 @@ For example:
 
 console.log(1.0000000000000005 === 1) // => false
 
-let A = matrix.createMatrix("1.0000000000000005");
-let B = matrix.createMatrix("1");
+let A = matrixes.createMatrix("1.0000000000000005");
+let B = matrixes.createMatrix("1");
 
-console.log(matrix.equals(A, B, true)); // => true
-console.log(matrix.equals(A, B)); // => false
+console.log(matrixes.equals(A, B, true)); // => true
+console.log(matrixes.equals(A, B)); // => false
 
 // JavaScript doesn't operate with this much precision for values >= 1 ?
 let C = createMatrix("1.0000000000000001"); // 1 + 1e-16
 console.log(C); // => [ [ 1 ] ]
-console.log(matrix.equals(B, C)); // => true
+console.log(matrixes.equals(B, C)); // => true
 
 ```
 
-### matrix.getPrecision()
+### matrixes.getPrecision()
 
-Returns the level of precision that will be used for testing near-equality in `matrix.equals`.
-The user can alter this level using matrix.setPrecision(newPrecision).
+Returns the level of precision that will be used for testing near-equality in `matrixes.equals`.
+The user can alter this level using matrixes.setPrecision(newPrecision).
 
 If no precision is set beforehand, this value defaults to 2e-15.
 <!-- TODO: Add link to #setPrecision here -->
 
-### matrix.identity(size)
+### matrixes.identity(size)
 
 - size: <Integer> *or* a float, double, etc. that is equivalent to an integer
 
@@ -138,21 +138,21 @@ For example:
 
 ```javascript
 
-let a = matrix.identity(2);
+let a = matrixes.identity(2);
 // [[1, 0], [0, 1]]
 
-let b = matrix.identity(2.000);
+let b = matrixes.identity(2.000);
 // [[1, 0], [0, 1]]
 
-let c = matrix.identity(4.23);
+let c = matrixes.identity(4.23);
 // Throws an error.
 
-let d = matrix.identity(Infinity);
+let d = matrixes.identity(Infinity);
 // Throws an error.
 
 ```
 
-### matrix.inverse(matrix)
+### matrixes.inverse(matrix)
 
 - matrix: <Matrix>
 
@@ -167,7 +167,7 @@ Throws an error if:
 
 - The given matrix is singular (square but not invertible => the determinant is 0).
 
-### matrix.is2DArray(matrix)
+### matrixes.is2DArray(matrix)
 
 - matrix: <Matrix>
 
@@ -180,13 +180,13 @@ None of the arguments in the first/outer-level array can be anything but arrays;
 none of the elements in the second/inner-level arrays can be objects according to `typeof`.
 I.e., if `typeof matrix[i][j] === 'object'`, the argument is not a 2D array.
 
-### matrix.isRectangular(matrix)
+### matrixes.isRectangular(matrix)
 
 - matrix: <Matrix>
 
 Returns a boolean: `true` if the matrix is rectangular, `false` if it isn't.
 
-The argument must be a two-dimensional array according to `matrix.is2DArray`.
+The argument must be a two-dimensional array according to `matrixes.is2DArray`.
 Because that's the only requirement, many invalid matrices will result in a `true` return value here.
 
 For example:
@@ -199,7 +199,7 @@ let a = [
   [() => 'yep, this is a function', 2]
 ];
 
-let doesItWork = matrix.isRectangular(a);
+let doesItWork = matrixes.isRectangular(a);
 // doesItWork === true
 
 ```
@@ -207,13 +207,13 @@ let doesItWork = matrix.isRectangular(a);
 There's definitely some strange behavior that can go on here.
 Because of that, it's primarily used just for checking dimensions.
 
-### matrix.isSquare(matrix)
+### matrixes.isSquare(matrix)
 
 - matrix: <Matrix>
 
 Returns a boolean: `true` if the matrix is rectangular, `false` if it isn't.
 
-### matrix.isValidMatrix(matrix)
+### matrixes.isValidMatrix(matrix)
 
 - matrix: <Matrix>
 
@@ -230,7 +230,7 @@ This means that `[[]]` is *not* a valid matrix, but `[[1]]` is.
 
 - All entries must be finite numbers (i.e., not Infinity and not NaN).
 
-### matrix.multiply(matrixOne, matrixTwo)
+### matrixes.multiply(matrixOne, matrixTwo)
 
 - matrixOne: <Matrix>
 - matrixTwo: <Matrix>
@@ -241,7 +241,7 @@ Throws an error if either matrix is invalid or if the two matrices cannot be mul
 To be multipliable, `matrixOne` must have dimensions *m x n* and `matrixTwo` must have dimensions *n x p*.
 (For any positive, nonzero integers m, n, and p.)
 
-### matrix.reduce(matrix)
+### matrixes.reduce(matrix)
 
 - matrix: <Matrix>
 
@@ -254,19 +254,19 @@ I'm just going to stop typing now.
 
 Throws an error if the argument is not a valid matrix.
 
-Here's an example of using `matrix.reduce`:
+Here's an example of using `matrixes.reduce`:
 
 ```javascript
 
-let A = matrix.createMatrix("1 2 3, 0 1 1, 1 2 3");
+let A = matrixes.createMatrix("1 2 3, 0 1 1, 1 2 3");
 
-let reduced = matrix.reduce(A);
+let reduced = matrixes.reduce(A);
 console.log(reduced); // => [ [1, 0, 1], [0, 1, 1], [0, 0, 0] ]
 // reduced is the RREF of matrix A.
 
 ```
 
-### matrix.reduceAug(coefficients, solutions)
+### matrixes.reduceAug(coefficients, solutions)
 
 - coefficients: <Matrix>
 - solutions: <Matrix>
@@ -275,14 +275,14 @@ Returns the augmented matrix made by adjoining `coefficients` and `solutions`, t
 Note that `solutions` does not necessarily have to be a vector.
 For example, it could be an identity matrix, and you could reduce to find an inverse using #reduceAug.
 
-Here's an example of using `matrix.reduceAug`:
+Here's an example of using `matrixes.reduceAug`:
 
 ```javascript
 
-let coeffs = matrix.createMatrix("-2 1, 1 -4");
-let solutions = matrix.createMatrix("-3, -2");
+let coeffs = matrixes.createMatrix("-2 1, 1 -4");
+let solutions = matrixes.createMatrix("-3, -2");
 
-let reduced = matrix.reduceAug(coeffs, solutions);
+let reduced = matrixes.reduceAug(coeffs, solutions);
 console.log(reduced); // => [ [1, 0, 2], [0, 1, 1] ]
 
 ```
@@ -302,7 +302,7 @@ Concatenation occurs as follows:
 
 ```
 
-### matrix.scale(matrix, scalar)
+### matrixes.scale(matrix, scalar)
 
 - matrix: <Matrix>
 - scalar: <Number>
@@ -312,18 +312,18 @@ That is, it returns a matrix `newMatrix` such that each `newMatrix[i][j]` is equ
 
 Note that this *doesn't* alter the passed matrix, it returns a new one instead.
 
-### matrix.setPrecision(newPrecision)
+### matrixes.setPrecision(newPrecision)
 
 - newPrecision: <Number> *or* "default"
 
-Sets a new precision for determining near-equality in matrix.equals.
+Sets a new precision for determining near-equality in matrixes.equals.
 Also *returns* the new precision that the user just set.
 
-Calling `matrix.setPrecision("default")` sets the precision level to 2e-15.
+Calling `matrixes.setPrecision("default")` sets the precision level to 2e-15.
 
 `newPrecision` must be either the string "default" or a finite number (not NaN).
 
-### matrix.subtract(matrixOne, matrixTwo)
+### matrixes.subtract(matrixOne, matrixTwo)
 
 - matrixOne: <Matrix>
 - matrixTwo: <Matrix>
@@ -333,7 +333,7 @@ Doesn't alter either argument.
 
 Throws an error if the matrices do not have the same dimensions or if either matrix is invalid.
 
-### matrix.zeros(numRows, numColumns)
+### matrixes.zeros(numRows, numColumns)
 
 - numRows: <Integer> *or* a float, double, etc. that is equivalent to an integer
 - numColumns: <Integer> *or* a float, double, etc. that is equivalent to an integer
