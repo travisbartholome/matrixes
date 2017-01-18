@@ -65,7 +65,7 @@ function isSquare(matrix) {
   if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
   return isRectangular(matrix) && matrix.length === matrix[0].length;
 }
-Matrix.isSquare = require('./functions/isSquare.js');
+Matrix.isSquare = isSquare;
 
 // --
 
@@ -97,7 +97,7 @@ function copy(matrix) {
   if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
   return matrix.map(row => row.slice(0));
 }
-Matrix.copy = require('./functions/copy.js');
+Matrix.copy = copy;
 
 /* Methods */
 
