@@ -110,6 +110,41 @@ describe('#identity', function() {
   });
 });
 
+describe('#random', function() {
+  it.skip('should return a random matrix (elements between 0 and 1) with the dimensions that were passed in', function() {
+    // How do I test this?
+    // Can test dimensions, but what about content?
+  });
+
+  it('should accept integers stored as floats with decimal zeros', function() {
+    let d1 = 2.00, d2 = 3.0, d3 = 1.0000;
+    let m1 = matrix.random(d1, d3),
+        m2 = matrix.random(d2, d1),
+        m3 = matrix.random(d3, d2);
+    assert.equal(m1.length, d1);
+    assert.equal(m2.length, d2);
+    assert.equal(m3.length, d3);
+    assert.equal(m1[0].length, d3);
+    assert.equal(m2[0].length, d1);
+    assert.equal(m3[0].length, d2);
+  });
+
+  it('should throw an error for all non-integer arguments', function() {
+    let integerSizeError = 'Invalid matrix size: both row size and column size must be an integer';
+    expect(() => matrix.random(1.23, 3)).to.throw(integerSizeError);
+    expect(() => matrix.random(2, NaN)).to.throw(integerSizeError);
+    expect(() => matrix.random('2', 3)).to.throw(integerSizeError);
+    expect(() => matrix.random(Infinity, 3)).to.throw(integerSizeError);
+  });
+
+  it('should throw an error if the argument is <= 0', function() {
+    let nonzeroSizeError = 'Invalid matrix size: both row size and column size must be greater than 0';
+    expect(() => matrix.random(0, 3)).to.throw(nonzeroSizeError);
+    expect(() => matrix.random(2, -1)).to.throw(nonzeroSizeError);
+    expect(() => matrix.random(-2, 0)).to.throw(nonzeroSizeError);
+  });
+});
+
 describe('#zeros', function() {
   it('should return a zero matrix with the size that was passed in.', function() {
     assert.equal(equals(matrix.zeros(2, 2), [[0, 0], [0, 0]]), true);

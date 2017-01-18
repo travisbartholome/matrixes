@@ -274,6 +274,30 @@ Matrix.multiply = multiply;
 
 // --
 
+function random(numRows, numColumns) {
+  if (!Number.isInteger(numRows) || !Number.isInteger(numColumns)) {
+    // Consider using Number.isSafeInteger here.
+    throw new Error('Invalid matrix size: both row size and column size must be an integer');
+  }
+
+  if (numRows <= 0 || numColumns <= 0) {
+    throw new Error('Invalid matrix size: both row size and column size must be greater than 0');
+  }
+
+  let matrix = [];
+  for (let i = 0; i < numRows; i++) {
+    let row = [];
+    for (let j = 0; j < numColumns; j++) {
+      row.push(Math.random());
+    }
+    matrix.push(row);
+  }
+  return matrix;
+}
+Matrix.random = random;
+
+// --
+
 function reduce(inputMatrix) {
   if (!isValidMatrix(inputMatrix)) throw new Error('Invalid matrix');
   let matrix = copy(inputMatrix);

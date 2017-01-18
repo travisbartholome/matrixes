@@ -93,7 +93,9 @@
 
 - [x] Fix #equals hack in the tests for #solve.
 
-- [ ] Add a method to generate a random matrix (between 0 and 1, I guess?).
+- [x] Add a method to generate a random matrix (between 0 and 1, I guess?).
+
+- [ ] Figure out a way to test the output of #random.
 
 - [ ] Add more example scripts.
 
