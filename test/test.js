@@ -268,11 +268,6 @@ describe('#reduceAug', function() {
     assert.equal(equals(matrix.reduceAug([[-2,1],[1,-4]], [[-3],[-2]]), [[1,0,2],[0,1,1]]), true);
   });
 
-  it('should throw an error if either argument is not a valid matrix', function() {
-    expect(() => matrix.reduceAug('asdf', [[1],[2],[3]])).to.throw('Invalid matrix');
-    expect(() => matrix.reduceAug([[1, 2],[1, 2]], {})).to.throw('Invalid matrix');
-  });
-
   it('should be able to handle solution matrices that are *not* just vectors', function() {
     assert.equal(equals(matrix.reduceAug([[0,1,1],[1,3,3]], [[1,2],[3,4]]), [[1,0,0,0,-2],[0,1,1,1,2]]), true);
     // Next case is equivalent to finding an inverse.
@@ -288,6 +283,19 @@ describe('#reduceAug', function() {
     let res = matrix.reduceAug(mat1, mat2);
     assert.equal(equals(mat1, [[1,2],[2,3]]), true);
     assert.equal(equals(mat2, [[1],[1]]), true);
+  });
+
+  it('should throw an error if the two arguments do not have the same number of rows', function() {
+    expect(() => matrix.reduceAug([[1,2],[4,5],[3,2]], [[1,2,3],[4,3,2]]))
+    .to.throw('Arguments must have the same number of rows');
+
+    expect(() => matrix.reduceAug([[1,1],[2,3]], [[1],[2],[3]]))
+    .to.throw('Arguments must have the same number of rows');
+  });
+
+  it('should throw an error if either argument is not a valid matrix', function() {
+    expect(() => matrix.reduceAug('asdf', [[1],[2],[3]])).to.throw('Invalid matrix');
+    expect(() => matrix.reduceAug([[1, 2],[1, 2]], {})).to.throw('Invalid matrix');
   });
 });
 
@@ -336,13 +344,18 @@ describe('#solve', function() {
     assert.equal(equals([matrix.solve(coeffsTwo, solTwo)], [varValuesTwo], true), true);
   });
 
-  it('should throw an error if either argumment is not a valid matrix', function() {
-    expect(() => matrix.solve({}, [[1],[2]])).to.throw('Invalid matrix');
-    expect(() => matrix.solve([[1,2],[3,4]], x=>3*x)).to.throw('Invalid matrix');
+  it('should throw an error if the arguments do not have the same number of rows', function() {
+    expect(() => matrix.solve([[1,1],[2,3]], [[1],[2],[3]]))
+    .to.throw('Arguments must have the same number of rows');
   });
 
   it.skip('should throw an error if the "solution" argument is not in vector form', function() {
 
+  });
+
+  it('should throw an error if either argumment is not a valid matrix', function() {
+    expect(() => matrix.solve({}, [[1],[2]])).to.throw('Invalid matrix');
+    expect(() => matrix.solve([[1,2],[3,4]], x=>3*x)).to.throw('Invalid matrix');
   });
 });
 

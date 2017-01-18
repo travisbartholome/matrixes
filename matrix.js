@@ -316,6 +316,7 @@ Matrix.reduce = reduce;
 
 function reduceAug(inputOne, inputTwo) {
   if (!isValidMatrix(inputOne) || !isValidMatrix(inputTwo)) throw new Error('Invalid matrix');
+  if (inputOne.length !== inputTwo.length) throw new Error('Arguments must have the same number of rows');
   let matrix = copy(inputOne).map((row, index) => row.concat(inputTwo[index].slice(0)));
   return reduce(matrix);
 }
