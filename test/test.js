@@ -111,9 +111,28 @@ describe('#identity', function() {
 });
 
 describe('#random', function() {
-  it.skip('should return a random matrix (elements between 0 and 1) with the dimensions that were passed in', function() {
-    // How do I test this?
-    // Can test dimensions, but what about content?
+  it('should return a random matrix (elements between 0 and 1) with the dimensions that were passed in', function() {
+    // Can I create a better way to test the content here?
+    let rand = matrix.random(3, 4);
+    assert.equal(rand.length, 3);
+    assert.equal(rand[0].length, 4);
+    let elementsInRange = true, isRandom = true;
+    let prev = 1;
+    for (let i = 0; i < rand.length; i++) {
+      for (let j = 0; j < rand[0].length; j++) {
+        if (rand[i][j] < 0 || rand[i][j] >= 1) {
+          elementsInRange = false;
+          break;
+        }
+        if (prev === rand[i][j]) {
+          isRandom = false;
+          break;
+        }
+        prev = rand[i][j];
+      }
+      if (!elementsInRange || !isRandom) break;
+    }
+    assert.equal(elementsInRange && isRandom, true);
   });
 
   it('should accept integers stored as floats with decimal zeros', function() {
