@@ -1,5 +1,13 @@
 # TODO list
 
+- [ ] Add a #transpose method.
+
+- [ ] Add a #augment (horizontal concat) method.
+
+- [ ] Add a #stack (vertical concat) method.
+
+- [ ] Add a #disp method that prints matrices nicely.
+
 - [ ] Add more example scripts.
 
 - [ ] Allow add, subtract, and multiply to take any number of arguments?
@@ -14,7 +22,11 @@
 
     * These might be best as methods on `matrix.prototype` rather than on `matrix` itself.
 
-    * I.e., usage would be `A.scale(2)` (doubles A without creating a new matrix) vs. `B = matrix.scale(A, 2);` (creates a new matrix that is double matrix A).
+    * I.e., usage would be `A.scale(2)` (doubles A without creating a new matrix)
+      vs. `B = matrix.scale(A, 2);` (creates a new matrix that is double matrix A).
+
+    * disp, add, scale, subtract, multiply, reduce (?),
+      det, inverse, transpose, "is (something)" assertions...
 
 - [ ] Add support for math expressions in #createMatrix. Avoid using `eval`.
 

@@ -433,6 +433,18 @@ describe('#subtract', function() {
   });
 });
 
+describe('#transpose', function() {
+  it('should transpose the given matrix (switch rows and columns)', function() {
+    let mat = [[1, 2, 3], [2, 3, 4], [-1, 0, -2], [1, -3, -2]];
+    let transposed = [[1, 2, -1, 1], [2, 3, 0, -3], [3, 4, -2, -2]];
+    assert.equal(equals(matrix.transpose(mat), transposed), true);
+  });
+
+  it('should throw an error if the argument is not a valid matrix', function() {
+    expect(() => matrix.transpose([])).to.throw('Invalid matrix');
+  });
+});
+
 
 
 /* Assertions */

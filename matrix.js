@@ -402,6 +402,24 @@ Matrix.subtract = subtract;
 
 // --
 
+function transpose(matrix) {
+  if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
+
+  let output = [];
+  for (let c = 0; c < matrix[0].length; c++) {
+    let newRow = [];
+    for (let r = 0; r < matrix.length; r++) {
+      newRow.push(matrix[r][c]);
+    }
+    output.push(newRow);
+  }
+  
+  return output;
+}
+Matrix.transpose = transpose;
+
+// --
+
 function zeros(numRows, numColumns) {
   if (!Number.isInteger(numRows) || !Number.isInteger(numColumns)) {
     // Consider using Number.isSafeInteger here.
