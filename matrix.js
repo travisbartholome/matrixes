@@ -397,6 +397,23 @@ function solve(coeffs, solutions) {
 }
 Matrix.solve = solve;
 
+// --
+
+function stack(matrixOne, matrixTwo) {
+  if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
+    throw new Error('Invalid matrix');
+  }
+
+  if (matrixOne[0].length !== matrixTwo[0].length) {
+    throw new Error('Matrices must have the same number of columns');
+  }
+
+  return matrixOne.concat(matrixTwo);
+}
+Matrix.stack = stack;
+
+// --
+
 function subtract(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
     throw new Error('Invalid matrix');

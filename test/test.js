@@ -444,6 +444,35 @@ describe('#solve', function() {
   });
 });
 
+describe('#stack', function() {
+  it('should return the vertical concatenation of A and B', function() {
+    let m1 = [[1,2,3],[3,2,1]];
+    let m2 = [[0,-1,-2]];
+    let stacked = matrix.stack(m1, m2);
+    let correct = [[1,2,3],[3,2,1],[0,-1,-2]];
+    assert.equal(equals(stacked, correct), true);
+
+    assert.equal(equals(matrix.stack([[1]], [[2],[3]]), [[1],[2],[3]]), true);
+  });
+
+  it('should not alter either argument', function() {
+    let m1 = [[1,2]];
+    let m2 = [[3,4],[5,6]];
+    let stacked = matrix.stack(m1, m2);
+    assert.equal(equals(m1, [[1, 2]]), true);
+    assert.equal(equals(m2, [[3,4],[5,6]]), true);
+  });
+
+  it('should throw an error if the matrices do not have the same number of columns', function() {
+    expect(() => matrix.stack([[1]], [[2,3]])).to.throw('Matrices must have the same number of columns');
+  });
+
+  it('should throw an error if either argument is not a valid matrix', function() {
+    expect(() => matrix.stack({}, [[1,2],[0,-1]])).to.throw('Invalid matrix');
+    expect(() => matrix.stack([[1,2,3],[0,-1,-2]], 'asdf')).to.throw('Invalid matrix');
+  });
+});
+
 describe('#subtract', function() {
   it('should return the difference of the first and second matrices', function() {
     assert.equal(equals(matrix.subtract([[1, 2, 3],[4, 5, 6]], [[0, -1, 2],[3, -4, -5]]), [[1, 3, 1],[1, 9, 11]]), true);

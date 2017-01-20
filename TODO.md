@@ -1,12 +1,14 @@
 # TODO list
 
+- [x] Consider moving completed items in TODO to a CHANGELOG file.
+
 - [x] Add a #transpose method.
 
 - [x] Add a #augment (horizontal concat) method.
 
-- [ ] Add docs for #transpose and #augment.
+- [x] Add a #stack (vertical concat) method.
 
-- [ ] Add a #stack (vertical concat) method.
+- [ ] Add docs for #transpose, #augment, and #stack.
 
 - [ ] Add a #disp method that prints matrices nicely.
 
@@ -15,8 +17,6 @@
 - [ ] Allow add, subtract, and multiply to take any number of arguments?
 
 - [ ] Optimize #inverse and #det methods?
-
-- [ ] Consider moving completed items in TODO to a CHANGELOG file.
 
 - [ ] Try to DRY up the tests a little bit when testing things like error handling and invalid arguments.
 
