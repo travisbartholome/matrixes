@@ -1,8 +1,10 @@
 # TODO list
 
-- [ ] Add a #transpose method.
+- [x] Add a #transpose method.
 
-- [ ] Add a #augment (horizontal concat) method.
+- [x] Add a #augment (horizontal concat) method.
+
+- [ ] Add docs for #transpose and #augment.
 
 - [ ] Add a #stack (vertical concat) method.
 

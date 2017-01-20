@@ -99,6 +99,8 @@ function copy(matrix) {
 }
 Matrix.copy = copy;
 
+// ---------------
+
 /* Methods */
 
 function add(matrixOne, matrixTwo) {
@@ -120,6 +122,21 @@ function add(matrixOne, matrixTwo) {
   return output;
 }
 Matrix.add = add;
+
+// --
+
+function augment(matrixOne, matrixTwo) {
+  if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
+    throw new Error('Invalid matrix');
+  }
+
+  if (matrixOne.length !== matrixTwo.length) {
+    throw new Error('Matrices must have the same number of rows');
+  }
+
+  return matrixOne.map((row, index) => row.concat(matrixTwo[index]));
+}
+Matrix.augment = augment;
 
 // --
 
@@ -413,7 +430,7 @@ function transpose(matrix) {
     }
     output.push(newRow);
   }
-  
+
   return output;
 }
 Matrix.transpose = transpose;

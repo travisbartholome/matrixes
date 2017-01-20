@@ -221,6 +221,34 @@ describe('#add', function() {
   });
 });
 
+describe('#augment', function() {
+  it('should return the augmented matrix A|B where A and B are the two arguments', function() {
+    let m1 = [[1,2],[3,0],[2,1]];
+    let m2 = [[3,2],[1,2],[3,0]];
+    let aug = matrix.augment(m1, m2);
+    let correct = [[1,2,3,2],[3,0,1,2],[2,1,3,0]];
+    assert.equal(equals(aug, correct), true);
+  });
+
+  it('should not alter either argument', function() {
+    let m1 = [[1,2],[3,4]];
+    let m2 = [[1],[2]];
+    let aug = matrix.augment(m1, m2)
+    assert.equal(equals(m1, [[1,2],[3,4]]), true);
+    assert.equal(equals(m2, [[1],[2]]), true);
+  });
+
+  it('should throw an error if the matrices do not have the same number of rows', function() {
+    expect(() => matrix.augment([[1,2],[1,2],[1,2]], [[0,2],[3,1]]))
+    .to.throw('Matrices must have the same number of rows');
+  });
+
+  it('should throw an error if either argument is not a valid matrix', function() {
+    expect(() => matrix.augment('g', [[1,2],[1,2]])).to.throw('Invalid matrix');
+    expect(() => matrix.augment([[1,2],[1,2]], {})).to.throw('Invalid matrix');
+  });
+});
+
 describe('#det', function() {
   it('should return the determinant of a matrix', function() {
     assert.equal(matrix.det([[1,2],[1,2]]), 0);
@@ -438,6 +466,12 @@ describe('#transpose', function() {
     let mat = [[1, 2, 3], [2, 3, 4], [-1, 0, -2], [1, -3, -2]];
     let transposed = [[1, 2, -1, 1], [2, 3, 0, -3], [3, 4, -2, -2]];
     assert.equal(equals(matrix.transpose(mat), transposed), true);
+  });
+
+  it('should not alter the original argument', function() {
+    let mat = [[1,2],[3,4],[5,6]];
+    let tr = matrix.transpose(mat);
+    assert.equal(equals(mat, [[1,2],[3,4],[5,6]]), true);
   });
 
   it('should throw an error if the argument is not a valid matrix', function() {
