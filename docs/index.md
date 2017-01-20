@@ -24,6 +24,17 @@ Doesn't alter either argument.
 
 Throws an error if the matrices do not have the same dimensions or if either matrix is invalid.
 
+### matrixes.augment(matrixOne, matrixTwo)
+
+- matrixOne: <Matrix>
+- matrixTwo: <Matrix>
+
+Returns the matrix formed by augmenting `matrixOne` with `matrixTwo`.
+That is, it takes each column from `matrixTwo` and tacks it onto the end of `matrixOne`.
+
+Throws an error if the matrices have different numbers of rows
+or if either matrix isn't valid.
+
 ### matrixes.copy(matrix)
 
 - matrix: <Matrix>
@@ -373,6 +384,48 @@ Returns the matrix difference `matrixOne` minus `matrixTwo`.
 Doesn't alter either argument.
 
 Throws an error if the matrices do not have the same dimensions or if either matrix is invalid.
+
+### matrixes.stack(matrixOne, matrixTwo)
+
+- matrixOne: <Matrix>
+- matrixTwo: <Matrix>
+
+Returns the vertical concatenation of `matrixOne` and `matrixTwo`.
+That is, it tacks the rows of `matrixTwo` onto the bottom of `matrixOne`
+
+Throws an error if the two matrices have different numbers of columns
+or if either matrix isn't valid.
+
+### matrixes.transpose(matrix)
+
+- matrix: <Matrix>
+
+Returns the transposition of the given matrix.
+That is, it swaps the rows of said matrix with its columns.
+
+For example:
+
+```javascript
+
+let original = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+let transposed = matrixes.transpose(original);
+
+console.log(tranposed);
+
+/* Logs the following:
+[ [1, 4, 7],
+  [2, 5, 8],
+  [3, 6, 9] ]
+*/
+
+```
+
+Throws an error if the matrix isn't valid.
 
 ### matrixes.zeros(numRows, numColumns)
 

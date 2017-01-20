@@ -8,7 +8,7 @@
 
 - [x] Add a #stack (vertical concat) method.
 
-- [ ] Add docs for #transpose, #augment, and #stack.
+- [x] Add docs for #transpose, #augment, and #stack.
 
 - [ ] Add a #disp method that prints matrices nicely.
 
