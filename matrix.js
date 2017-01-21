@@ -195,6 +195,39 @@ Matrix.det = det;
 
 // --
 
+function disp(matrix) {
+  if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
+
+  let maxEntryLength = matrix.reduce(function(longestEntry, currentRow) {
+    let longestInRow = currentRow.reduce(function(len, cur) {
+      if (cur.toString().length > len) len = cur.toString().length;
+      return len;
+    }, 0);
+    if (longestInRow > longestEntry) longestEntry = longestInRow;
+    return longestEntry;
+  }, 0);
+
+  console.log('');
+
+  let str, numStr, numLen;
+  for (let i = 0; i < matrix.length; i++) {
+    str = '';
+    for (let j = 0; j < matrix[0].length; j++) {
+      numStr = matrix[i][j].toString();
+      numLen = numStr.length;
+      for (let space = 0; space < maxEntryLength - numLen; space++) {
+        str += ' ';
+      }
+      str += numStr + ' ';
+    }
+    console.log(str);
+    console.log('');
+  }
+}
+Matrix.disp = disp;
+
+// --
+
 function equals(matrixOne, matrixTwo, useNearEquality) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) throw new Error('Invalid matrix');
 

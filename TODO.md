@@ -12,6 +12,10 @@
 
 - [ ] Add a #disp method that prints matrices nicely.
 
+- [ ] Figure out how to test #disp.
+
+- [ ] Add docs for #disp.
+
 - [ ] Add more example scripts.
 
 - [ ] Allow add, subtract, and multiply to take any number of arguments?

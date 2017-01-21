@@ -656,6 +656,16 @@ describe('#copy', function() {
   });
 });
 
+describe('#disp', function() {
+  it.skip('should nicely display the given matrix', function() {
+    // How does one test this?
+  });
+
+  it('should throw an error if the argument is not a valid matrix', function() {
+    expect(() => matrix.disp([[1,2], 'asdf'])).to.throw('Invalid matrix');
+  });
+});
+
 // NOTE: Tests for getPrecision and setPrecision are highly interdependent.
 // Should I work to untangle them?
 describe('#getPrecision', function() {
