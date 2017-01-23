@@ -85,6 +85,12 @@ Returns the determinant of the given matrix.
 Throws an error if the matrix is not square (because a matrix must be square to take a determinant)
 or if the argument isn't a valid matrix.
 
+### matrices.disp(matrix)
+
+- matrix: <Matrix>
+
+Pretty-prints the given matrix to the console/terminal.
+
 ### matrixes.equals(matrixOne, matrixTwo [, useNearEquality])
 
 - matrixOne: <Matrix>

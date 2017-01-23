@@ -10,11 +10,13 @@
 
 - [x] Add docs for #transpose, #augment, and #stack.
 
-- [ ] Add a #disp method that prints matrices nicely.
+- [x] Add a #disp method that prints matrices nicely.
+
+- [x] Add docs for #disp.
+
+- [ ] Improve #disp method appearance.
 
 - [ ] Figure out how to test #disp.
-
-- [ ] Add docs for #disp.
 
 - [ ] Add more example scripts.
 
