@@ -195,10 +195,9 @@ Matrix.det = det;
 
 // --
 
-function disp(matrix) {
-  if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
-
-  let maxEntryLength = matrix.reduce(function(longestEntry, currentRow) {
+function findLongestEntry(mat) {
+  if (!mat) return 0;
+  return mat.reduce(function(longestEntry, currentRow) {
     let longestInRow = currentRow.reduce(function(len, cur) {
       if (cur.toString().length > len) len = cur.toString().length;
       return len;
@@ -206,21 +205,52 @@ function disp(matrix) {
     if (longestInRow > longestEntry) longestEntry = longestInRow;
     return longestEntry;
   }, 0);
+}
+
+function disp(matrixOne, matrixTwo) {
+  if (!isValidMatrix(matrixOne)) {
+    throw new Error('Invalid matrix');
+  }
+
+  let isAugmented = Boolean(matrixTwo);
+  if (isAugmented) {
+    if (!isValidMatrix(matrixTwo)) {
+      throw new Error('Invalid matrix');
+    } else if (matrixTwo.length !== matrixOne.length) {
+      throw new Error('Multiple arguments must have the same number of rows');
+    }
+  }
+
+  let maxEntryLength = findLongestEntry(matrixOne);
+  if (isAugmented) {
+    maxEntryLength = Math.max(maxEntryLength, findLongestEntry(matrixTwo));
+  }
 
   console.log('');
 
   let str, numStr, numLen;
-  for (let i = 0; i < matrix.length; i++) {
-    str = '';
-    for (let j = 0; j < matrix[0].length; j++) {
-      numStr = matrix[i][j].toString();
+  for (let i = 0; i < matrixOne.length; i++) {
+    str = '( ';
+    for (let j = 0; j < matrixOne[0].length; j++) {
+      numStr = matrixOne[i][j].toString();
       numLen = numStr.length;
       for (let space = 0; space < maxEntryLength - numLen; space++) {
         str += ' ';
       }
       str += numStr + ' ';
     }
-    console.log(str);
+    if (isAugmented) {
+      str += '| ';
+      for (let j = 0; j < matrixTwo[0].length; j++) {
+        numStr = matrixTwo[i][j].toString();
+        numLen = numStr.length;
+        for (let space = 0; space < maxEntryLength - numLen; space++) {
+          str += ' ';
+        }
+        str += numStr + ' ';
+      }
+    }
+    console.log(str + ')');
     console.log('');
   }
 }

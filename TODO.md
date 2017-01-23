@@ -16,6 +16,8 @@
 
 - [ ] Improve #disp method appearance.
 
+- [ ] Test systems with free variables and no solutions in #solve.
+
 - [ ] Figure out how to test #disp.
 
 - [ ] Add more example scripts.

@@ -85,11 +85,14 @@ Returns the determinant of the given matrix.
 Throws an error if the matrix is not square (because a matrix must be square to take a determinant)
 or if the argument isn't a valid matrix.
 
-### matrices.disp(matrix)
+### matrices.disp(matrix [, augmentation])
 
 - matrix: <Matrix>
+- augmentation: <Matrix>
 
 Pretty-prints the given matrix to the console/terminal.
+If `augmentation` is given, prints an augmented matrix
+where `matrix` is augmented with `augmentation`.
 
 ### matrixes.equals(matrixOne, matrixTwo [, useNearEquality])
 

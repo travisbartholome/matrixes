@@ -657,12 +657,42 @@ describe('#copy', function() {
 });
 
 describe('#disp', function() {
-  it.skip('should nicely display the given matrix', function() {
+  describe.skip('should nicely display the given matrix', function() {
     // How does one test this?
+    it('should add parentheses to the beginning and end of each line', function() {
+      // Specify whitespace?
+    });
+
+    it('should add a pipe | between a main and augmented matrix', function() {
+
+    });
+
+    describe('should allot each entry as much space the longest entry will require', function(){
+      it('should work if the longest entry in the main matrix', function() {
+
+      });
+
+      it('should work if the longest entry is in the augmentation', function() {
+
+      });
+    });
   });
 
-  it('should throw an error if the argument is not a valid matrix', function() {
+  it.skip('should optionally take a second argument and display an augmented matrix', function() {
+
+  });
+
+  it('should throw an error if the main argument is not a valid matrix', function() {
     expect(() => matrix.disp([[1,2], 'asdf'])).to.throw('Invalid matrix');
+  });
+
+  it('should throw an error if the augmentation is not a valid matrix', function() {
+    expect(() => matrix.disp([[1,2],[3,4]], [{}, 'asdf'])).to.throw('Invalid matrix');
+  });
+
+  it('should throw an error if the main and aug matrices have different numbers of rows', function() {
+    expect(() => matrix.disp([[1,2],[3,4],[5,6]], [[1],[2],[3],[4]]))
+    .to.throw('Multiple arguments must have the same number of rows');
   });
 });
 
