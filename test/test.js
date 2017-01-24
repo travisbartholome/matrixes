@@ -727,3 +727,40 @@ describe('#setPrecision', function() {
     assert.equal(matrix.setPrecision('default'), 2e-15);
   })
 });
+
+
+
+/* Elements subclass */
+
+describe('Matrix.elements', function() {
+  it('should be an object', function() {
+    assert.equal(typeof matrix.elements, 'object');
+  });
+
+  it('should have methods', function() {
+    // Does it have at least one method?
+    assert.equal(true, Object.keys(matrix.elements).some(function(key) {
+      return typeof matrix.elements[key] === 'function';
+    }));
+  });
+
+  describe('#multiply', function() {
+    it('should multiply each element of the first matrix by the corresponding element of the second', function() {
+      let m1 = [[1, 3, 5],[-1, 0, 3],[2, 4, 1],[3, -3, -1]];
+      let m2 = [[0, -1, 3.5],[-1.2, 2, 1],[1, 12, 3],[-2, -2, -1.3]];
+      let correct = [[0, -3, 17.5],[1.2, 0, 3],[2, 48, 3],[-6, 6, 1.3]];
+      assert.equal(true, equals(matrix.elements.multiply(m1, m2), correct, true));
+    });
+
+    it('should throw an error if either matrix is not valid', function() {
+      expect(() => matrix.elements.multiply('asdf', [[1,2],[2,1]])).to.throw('Invalid matrix');
+      expect(() => matrix.elements.multiply([[1,2],[3,4]], {})).to.throw('Invalid matrix');
+    });
+
+    it('should throw an error if the matrices have different dimensions', function() {
+      let m1 = [[1,2,3],[4,5,6]];
+      let m2 = [[1,2],[3,4],[5,6]];
+      expect(() => matrix.elements.multiply(m1, m2)).to.throw('Matrices must have the same dimensions');
+    });
+  });
+});

@@ -538,3 +538,29 @@ function zeros(numRows, numColumns) {
   return matrix;
 }
 Matrix.zeros = zeros;
+
+/* Matrix.elements subclass */
+
+Matrix.elements = {};
+
+// --
+
+Matrix.elements.multiply = function(matrixOne, matrixTwo) {
+  if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
+    throw new Error('Invalid matrix');
+  }
+
+  if (matrixOne.length !== matrixTwo.length || matrixOne[0].length !== matrixTwo[0].length) {
+    throw new Error('Matrices must have the same dimensions');
+  }
+
+  let output = [], row;
+  for (let i = 0; i < matrixOne.length; i++) {
+    row = [];
+    for (let j = 0; j < matrixOne[0].length; j++) {
+      row.push(matrixOne[i][j] * matrixTwo[i][j]);
+    }
+    output.push(row);
+  }
+  return output;
+};

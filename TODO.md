@@ -14,7 +14,15 @@
 
 - [x] Add docs for #disp.
 
-- [ ] Improve #disp method appearance.
+- [x] Improve #disp method appearance.
+
+- [ ] Add Matrix.elements object (subclass?) to hold methods for elemental operations
+
+- [ ] elements#multiply(mat1, mat2): element-by-element multiplication
+
+- [ ] elements#divide(mat1, mat2): element-by-element division
+
+- [ ] elements#power(mat, pow): element-by-element exponentiation
 
 - [ ] Test systems with free variables and no solutions in #solve.
 
