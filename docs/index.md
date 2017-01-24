@@ -14,6 +14,45 @@ It's been my first real foray into TDD, which seems to be working fairly well.
 
 # Documentation
 
+## Matrixes.elements
+
+These methods perform element-by-element arithmetic operations on matrices.
+As a general rule, if a #elements method takes matrix arguments,
+all of those matrices must have the same dimensions.
+
+### matrixes.elements.multiply(matrixOne, matrixTwo)
+
+- matrixOne: <Matrix>
+- matrixTwo: <Matrix>
+
+Returns the matrix that results from element-by-element multiplication
+of `matrixOne` and `matrixTwo`.
+
+For example:
+
+```javascript
+
+let A = matrixes.createMatrix("1 2, 3 4");
+let B = matrixes.createMatrix("0 1, -1 -4");
+
+let elementMultiply = matrixes.elements.multiply(A, B);
+console.log(elementMultiply); // => [[0, 2], [-3, -16]]
+
+let C = matrixes.createMatrix("1 2 3, 4 5 6");
+console.log(matrixes.elements.multiply(A, C));
+// => Unequal dimensions; throws an error
+
+// Compare to normal matrix multiplication
+let normalMultiply = matrixes.multiply(A, B);
+console.log(normalMultiply); // => [[-2, -7], [-4, -13]]
+
+```
+
+Throws an error if the matrices have different dimensions
+or if either matrix is not valid.
+
+## Main Methods
+
 ### matrixes.add(matrixOne, matrixTwo)
 
 - matrixOne: <Matrix>
@@ -91,7 +130,7 @@ or if the argument isn't a valid matrix.
 - augmentation: <Matrix>
 
 Pretty-prints the given matrix to the console/terminal.
-If `augmentation` is given, prints an augmented matrix
+If `augmentation` is given, `disp` prints an augmented matrix
 where `matrix` is augmented with `augmentation`.
 
 ### matrixes.equals(matrixOne, matrixTwo [, useNearEquality])

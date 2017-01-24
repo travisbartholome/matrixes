@@ -16,9 +16,9 @@
 
 - [x] Improve #disp method appearance.
 
-- [ ] Add Matrix.elements object (subclass?) to hold methods for elemental operations
+- [x] Add Matrix.elements object (subclass?) to hold methods for elemental operations
 
-- [ ] elements#multiply(mat1, mat2): element-by-element multiplication
+- [x] elements#multiply(mat1, mat2): element-by-element multiplication
 
 - [ ] elements#divide(mat1, mat2): element-by-element division
 
