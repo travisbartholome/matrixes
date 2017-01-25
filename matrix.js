@@ -564,3 +564,17 @@ Matrix.elements.multiply = function(matrixOne, matrixTwo) {
   }
   return output;
 };
+
+// --
+
+Matrix.elements.divide = function(matrixOne, matrixTwo) {
+  let output = [], row;
+  for (let i = 0; i < matrixOne.length; i++) {
+    row = [];
+    for (let j = 0; j < matrixOne[0].length; j++) {
+      row.push(matrixOne[i][j] / matrixTwo[i][j]);
+    }
+    output.push(row);
+  }
+  return output;
+};

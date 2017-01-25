@@ -22,6 +22,8 @@
 
 - [ ] elements#divide(mat1, mat2): element-by-element division
 
+- [ ] Write docs for elements#divide.
+
 - [ ] elements#power(mat, pow): element-by-element exponentiation
 
 - [ ] Test systems with free variables and no solutions in #solve.

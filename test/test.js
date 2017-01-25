@@ -745,7 +745,7 @@ describe('Matrix.elements', function() {
   });
 
   describe('#multiply', function() {
-    it('should multiply each element of the first matrix by the corresponding element of the second', function() {
+    it('should return a new matrix where entry i,j is the product of the i,jth entries of the arguments', function() {
       let m1 = [[1, 3, 5],[-1, 0, 3],[2, 4, 1],[3, -3, -1]];
       let m2 = [[0, -1, 3.5],[-1.2, 2, 1],[1, 12, 3],[-2, -2, -1.3]];
       let correct = [[0, -3, 17.5],[1.2, 0, 3],[2, 48, 3],[-6, 6, 1.3]];
@@ -761,6 +761,28 @@ describe('Matrix.elements', function() {
       let m1 = [[1,2,3],[4,5,6]];
       let m2 = [[1,2],[3,4],[5,6]];
       expect(() => matrix.elements.multiply(m1, m2)).to.throw('Matrices must have the same dimensions');
+    });
+
+    it('should not alter either original argument', function() {
+      let m1 = [[1],[2],[3],[4]];
+      let m2 = [[2],[1],[0],[-1]];
+      let res = matrix.elements.multiply(m1, m2);
+      assert.equal(true, equals(m1, [[1],[2],[3],[4]]));
+      assert.equal(true, equals(m2, [[2],[1],[0],[-1]]));
+    });
+  });
+
+  describe('#divide', function() {
+    it('should return a new matrix where entry i,j is the quotient of the i,jth entries of the arguments', function() {
+      let m1 = [[1,2,-3.4],[1.2,-1,0]];
+      let m2 = [[-2,1,4],[3,-0.2,1]];
+      let res = matrix.elements.divide(m1, m2);
+      let correct = [[-0.5,2,-0.85],[0.4,5,0]];
+      assert.equal(true, equals(res, correct, true));
+    });
+
+    it.skip('should throw an error if the matrix of divisors contains any zeros', function() {
+
     });
   });
 });
