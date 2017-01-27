@@ -568,6 +568,24 @@ Matrix.elements.multiply = function(matrixOne, matrixTwo) {
 // --
 
 Matrix.elements.divide = function(matrixOne, matrixTwo) {
+  if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
+    throw new Error('Invalid matrix');
+  }
+
+  if (matrixOne.length !== matrixTwo.length || matrixOne[0].length !== matrixTwo[0].length) {
+    throw new Error('Matrices must have the same dimensions');
+  }
+
+  // Might be faster to do this inside the other for loops?
+  // This definitely avoids using unnecessary space, though.
+  for (let i = 0; i < matrixTwo.length; i++) {
+    for (let j = 0; j < matrixTwo[0].length; j++) {
+      if (matrixTwo[i][j] === 0) {
+        throw new Error('Cannot divide elements by zero');
+      }
+    }
+  }
+
   let output = [], row;
   for (let i = 0; i < matrixOne.length; i++) {
     row = [];

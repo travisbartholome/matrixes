@@ -781,8 +781,32 @@ describe('Matrix.elements', function() {
       assert.equal(true, equals(res, correct, true));
     });
 
-    it.skip('should throw an error if the matrix of divisors contains any zeros', function() {
+    it('should throw an error if the matrix of divisors contains any zeros', function() {
+      let m1 = [[1, 0, 2], [3, -1, -2]];
+      let m2 = [[3, 4, 0], [1, 0, 2]];
+      expect(() => matrix.elements.divide(m1, m2)).to.throw('Cannot divide elements by zero');
+    });
 
+    it('should throw an error if either matrix is not valid', function() {
+      let m1 = [[1, 3, '1']];
+      let m2 = [[1, 2, {}]];
+      let valid = [[1, -2, 0]];
+      expect(() => matrix.elements.divide(m1, valid)).to.throw('Invalid matrix');
+      expect(() => matrix.elements.divide(valid, m2)).to.throw('Invalid matrix');
+    });
+
+    it('should throw an error if the matrices have different dimensions', function() {
+      let m1 = [[1, 2], [3, 4]];
+      let m2 = [[1, 2, 3], [4, 5, 6]];
+      expect(() => matrix.elements.divide(m1, m2)).to.throw('Matrices must have the same dimensions');
+    });
+
+    it('should not alter either original argument', function() {
+      let m1 = [[-1,2],[3,-4],[5,0],[7,0]];
+      let m2 = [[-1, 2],[3,-4],[5,-6],[1,2]];
+      let res = matrix.elements.divide(m1, m2);
+      assert.equal(true, equals(m1, [[-1,2],[3,-4],[5,0],[7,0]]));
+      assert.equal(true, equals(m2, [[-1, 2],[3,-4],[5,-6],[1,2]]));
     });
   });
 });

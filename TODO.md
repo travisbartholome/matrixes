@@ -20,7 +20,7 @@
 
 - [x] elements#multiply(mat1, mat2): element-by-element multiplication
 
-- [ ] elements#divide(mat1, mat2): element-by-element division
+- [x] elements#divide(mat1, mat2): element-by-element division
 
 - [ ] Write docs for elements#divide.
 
