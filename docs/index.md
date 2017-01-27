@@ -20,6 +20,21 @@ These methods perform element-by-element arithmetic operations on matrices.
 As a general rule, if a #elements method takes matrix arguments,
 all of those matrices must have the same dimensions.
 
+### matrixes.elements.divide(matrixOne, matrixTwo)
+
+- matrixOne: <Matrix>
+- matrixTwo: <Matrix>
+
+Returns the matrix that results from element-by-element division
+of `matrixOne` and `matrixTwo`.
+
+Note that no entry in `matrixTwo` can be equal to zero.
+This would result in division by zero, which would yield a matrix containing `Infinity`.
+This isn't considered valid in this library.
+
+Throws an error if the matrices have different dimensions
+or if either matrix is not valid.
+
 ### matrixes.elements.multiply(matrixOne, matrixTwo)
 
 - matrixOne: <Matrix>
