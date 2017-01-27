@@ -1,29 +1,5 @@
 # TODO list
 
-- [x] Consider moving completed items in TODO to a CHANGELOG file.
-
-- [x] Add a #transpose method.
-
-- [x] Add a #augment (horizontal concat) method.
-
-- [x] Add a #stack (vertical concat) method.
-
-- [x] Add docs for #transpose, #augment, and #stack.
-
-- [x] Add a #disp method that prints matrices nicely.
-
-- [x] Add docs for #disp.
-
-- [x] Improve #disp method appearance.
-
-- [x] Add Matrix.elements object (subclass?) to hold methods for elemental operations
-
-- [x] elements#multiply(mat1, mat2): element-by-element multiplication
-
-- [x] elements#divide(mat1, mat2): element-by-element division
-
-- [x] Write docs for elements#divide.
-
 - [ ] elements#power(mat, pow): element-by-element exponentiation
 
 - [ ] Test systems with free variables and no solutions in #solve.
