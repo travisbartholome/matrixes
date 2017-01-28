@@ -5,6 +5,18 @@
 
 const Matrix = module.exports;
 
+/* Matrix errors */
+
+Matrix.error = {
+  invalidError: 'Invalid matrix',
+  dimensionError: 'Matrices must have the same dimensions',
+  dimensionColumnError: 'Matrices must have the same number of columns',
+  dimensionRowError: 'Matrices must have the same number of rows',
+  inputSizeIntegerError: 'Invalid matrix size: both row size and column size must be an integer',
+  inputSizeNonnegativeError: 'Invalid matrix size: both row size and column size must be greater than 0',
+  createNonFiniteError: 'Entries must all be finite numbers; check your syntax for errors'
+};
+
 /* Helper methods and assertion functions */
 
 function almostEquals(numberOne, numberTwo, precision) {
@@ -62,7 +74,7 @@ Matrix.isValidMatrix = isValidMatrix;
 // --
 
 function isSquare(matrix) {
-  if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
+  if (!isValidMatrix(matrix)) throw new Error(Matrix.error.invalidError);
   return isRectangular(matrix) && matrix.length === matrix[0].length;
 }
 Matrix.isSquare = isSquare;
@@ -94,7 +106,7 @@ Matrix.setPrecision = precision.setPrecision;
 // --
 
 function copy(matrix) {
-  if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
+  if (!isValidMatrix(matrix)) throw new Error(Matrix.error.invalidError);
   return matrix.map(row => row.slice(0));
 }
 Matrix.copy = copy;
@@ -105,11 +117,11 @@ Matrix.copy = copy;
 
 function add(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
-    throw new Error('Invalid matrix');
+    throw new Error(Matrix.error.invalidError);
   }
 
   if (matrixOne.length !== matrixTwo.length || matrixOne[0].length !== matrixTwo[0].length) {
-    throw new Error('Matrices must have the same dimensions');
+    throw new Error(Matrix.error.dimensionError);
   }
 
   let output = [];
@@ -127,11 +139,11 @@ Matrix.add = add;
 
 function augment(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
-    throw new Error('Invalid matrix');
+    throw new Error(Matrix.error.invalidError);
   }
 
   if (matrixOne.length !== matrixTwo.length) {
-    throw new Error('Matrices must have the same number of rows');
+    throw new Error(Matrix.error.dimensionRowError);
   }
 
   return matrixOne.map((row, index) => row.concat(matrixTwo[index]));
@@ -147,7 +159,7 @@ function createMatrix(input) {
     return string.split(' ').map(function(entry) {
       let number = parseFloat(entry);
       if (isNaN(number) || !isFinite(number)) {
-        throw new Error('Entries must all be finite numbers. Check your syntax for errors.');
+        throw new Error(Matrix.error.createNonFiniteError);
       } else {
         return number;
         // TODO: Make this so that you can use math expressions as entries.
@@ -166,7 +178,7 @@ Matrix.createMatrix = createMatrix;
 // --
 
 function det(matrix) {
-  if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
+  if (!isValidMatrix(matrix)) throw new Error(Matrix.error.invalidError);
   if (!isSquare(matrix)) throw new Error('Matrix must be square to take a determinant');
 
   if (matrix.length === 2) {
@@ -209,13 +221,13 @@ function findLongestEntry(mat) {
 
 function disp(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne)) {
-    throw new Error('Invalid matrix');
+    throw new Error(Matrix.error.invalidError);
   }
 
   let isAugmented = Boolean(matrixTwo);
   if (isAugmented) {
     if (!isValidMatrix(matrixTwo)) {
-      throw new Error('Invalid matrix');
+      throw new Error(Matrix.error.invalidError);
     } else if (matrixTwo.length !== matrixOne.length) {
       throw new Error('Multiple arguments must have the same number of rows');
     }
@@ -259,7 +271,7 @@ Matrix.disp = disp;
 // --
 
 function equals(matrixOne, matrixTwo, useNearEquality) {
-  if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) throw new Error('Invalid matrix');
+  if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) throw new Error(Matrix.error.invalidError);
 
   if (matrixOne.length !== matrixTwo.length) return false;
   if (matrixOne[0].length !== matrixTwo[0].length) return false;
@@ -309,7 +321,7 @@ Matrix.identity = identity;
 // --
 
 function inverse(inputMatrix) {
-  if (!isValidMatrix(inputMatrix)) throw new Error('Invalid matrix');
+  if (!isValidMatrix(inputMatrix)) throw new Error(Matrix.error.invalidError);
   if (!isSquare(inputMatrix)) throw new Error('Matrix must be square to be inverted');
   if (det(inputMatrix) === 0) throw new Error('Matrix is singular (not invertible)');
 
@@ -326,7 +338,7 @@ Matrix.inverse = inverse;
 
 function multiply(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
-    throw new Error('Invalid matrix');
+    throw new Error(Matrix.error.invalidError);
   }
 
   // Check if the matrices can be legally multiplied (mathematically speaking).
@@ -357,11 +369,11 @@ Matrix.multiply = multiply;
 function random(numRows, numColumns) {
   if (!Number.isInteger(numRows) || !Number.isInteger(numColumns)) {
     // Consider using Number.isSafeInteger here.
-    throw new Error('Invalid matrix size: both row size and column size must be an integer');
+    throw new Error(Matrix.error.inputSizeIntegerError);
   }
 
   if (numRows <= 0 || numColumns <= 0) {
-    throw new Error('Invalid matrix size: both row size and column size must be greater than 0');
+    throw new Error(Matrix.error.inputSizeNonnegativeError);
   }
 
   let matrix = [];
@@ -379,7 +391,7 @@ Matrix.random = random;
 // --
 
 function reduce(inputMatrix) {
-  if (!isValidMatrix(inputMatrix)) throw new Error('Invalid matrix');
+  if (!isValidMatrix(inputMatrix)) throw new Error(Matrix.error.invalidError);
   let matrix = copy(inputMatrix);
   let size = Math.min(matrix.length, matrix[0].length);
   for (let i = 0; i < size; i++) {
@@ -419,8 +431,8 @@ Matrix.reduce = reduce;
 // --
 
 function reduceAug(inputOne, inputTwo) {
-  if (!isValidMatrix(inputOne) || !isValidMatrix(inputTwo)) throw new Error('Invalid matrix');
-  if (inputOne.length !== inputTwo.length) throw new Error('Arguments must have the same number of rows');
+  if (!isValidMatrix(inputOne) || !isValidMatrix(inputTwo)) throw new Error(Matrix.error.invalidError);
+  if (inputOne.length !== inputTwo.length) throw new Error(Matrix.error.dimensionRowError);
   let matrix = copy(inputOne).map((row, index) => row.concat(inputTwo[index].slice(0)));
   return reduce(matrix);
 }
@@ -429,7 +441,7 @@ Matrix.reduceAug = reduceAug;
 // --
 
 function scale(matrix, scalar) {
-  if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
+  if (!isValidMatrix(matrix)) throw new Error(Matrix.error.invalidError);
 
   if (typeof scalar !== 'number' || isNaN(scalar) || !isFinite(scalar)) {
     throw new Error('Invalid scalar: must be a finite number');
@@ -453,7 +465,7 @@ Matrix.scale = scale;
 
 function solve(coeffs, solutions) {
   if (!isValidMatrix(coeffs) || !isValidMatrix(solutions)) {
-    throw new Error('Invalid matrix');
+    throw new Error(Matrix.error.invalidError);
   }
   let reduced = reduceAug(coeffs, solutions);
   return reduced.map(row => row[row.length - 1]);
@@ -464,11 +476,11 @@ Matrix.solve = solve;
 
 function stack(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
-    throw new Error('Invalid matrix');
+    throw new Error(Matrix.error.invalidError);
   }
 
   if (matrixOne[0].length !== matrixTwo[0].length) {
-    throw new Error('Matrices must have the same number of columns');
+    throw new Error(Matrix.error.dimensionColumnError);
   }
 
   return matrixOne.concat(matrixTwo);
@@ -479,11 +491,11 @@ Matrix.stack = stack;
 
 function subtract(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
-    throw new Error('Invalid matrix');
+    throw new Error(Matrix.error.invalidError);
   }
 
   if (matrixOne.length !== matrixTwo.length || matrixOne[0].length !== matrixTwo[0].length) {
-    throw new Error('Matrices must have the same dimensions');
+    throw new Error(Matrix.error.dimensionError);
   }
 
   let output = [];
@@ -500,7 +512,7 @@ Matrix.subtract = subtract;
 // --
 
 function transpose(matrix) {
-  if (!isValidMatrix(matrix)) throw new Error('Invalid matrix');
+  if (!isValidMatrix(matrix)) throw new Error(Matrix.error.invalidError);
 
   let output = [];
   for (let c = 0; c < matrix[0].length; c++) {
@@ -520,11 +532,11 @@ Matrix.transpose = transpose;
 function zeros(numRows, numColumns) {
   if (!Number.isInteger(numRows) || !Number.isInteger(numColumns)) {
     // Consider using Number.isSafeInteger here.
-    throw new Error('Invalid matrix size: both row size and column size must be an integer');
+    throw new Error(Matrix.error.inputSizeIntegerError);
   }
 
   if (numRows <= 0 || numColumns <= 0) {
-    throw new Error('Invalid matrix size: both row size and column size must be greater than 0');
+    throw new Error(Matrix.error.inputSizeNonnegativeError);
   }
 
   let matrix = [];
@@ -547,11 +559,11 @@ Matrix.elements = {};
 
 Matrix.elements.multiply = function(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
-    throw new Error('Invalid matrix');
+    throw new Error(Matrix.error.invalidError);
   }
 
   if (matrixOne.length !== matrixTwo.length || matrixOne[0].length !== matrixTwo[0].length) {
-    throw new Error('Matrices must have the same dimensions');
+    throw new Error(Matrix.error.dimensionError);
   }
 
   let output = [], row;
@@ -569,11 +581,11 @@ Matrix.elements.multiply = function(matrixOne, matrixTwo) {
 
 Matrix.elements.divide = function(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
-    throw new Error('Invalid matrix');
+    throw new Error(Matrix.error.invalidError);
   }
 
   if (matrixOne.length !== matrixTwo.length || matrixOne[0].length !== matrixTwo[0].length) {
-    throw new Error('Matrices must have the same dimensions');
+    throw new Error(Matrix.error.dimensionError);
   }
 
   // Might be faster to do this inside the other for loops?

@@ -1,5 +1,13 @@
 # TODO list
 
+- [x] In test.js, put error messages in constants or an object for consistency and reuse.
+
+    * Possibly define a `matrix.errors` object for this?
+
+    * Use for matrix.js as well
+
+- [ ] Possibly move errors to a different file to avoid clutter?
+
 - [ ] elements#power(mat, pow): element-by-element exponentiation
 
 - [ ] Test systems with free variables and no solutions in #solve.
