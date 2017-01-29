@@ -6,9 +6,9 @@
 
     * Use for matrix.js as well
 
-- [ ] Possibly move errors to a different file to avoid clutter?
+- [x] elements#power(mat, pow): element-by-element exponentiation
 
-- [ ] elements#power(mat, pow): element-by-element exponentiation
+- [ ] Possibly move errors to a different file to avoid clutter?
 
 - [ ] Test systems with free variables and no solutions in #solve.
 

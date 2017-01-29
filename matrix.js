@@ -557,28 +557,6 @@ Matrix.elements = {};
 
 // --
 
-Matrix.elements.multiply = function(matrixOne, matrixTwo) {
-  if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
-    throw new Error(Matrix.error.invalidError);
-  }
-
-  if (matrixOne.length !== matrixTwo.length || matrixOne[0].length !== matrixTwo[0].length) {
-    throw new Error(Matrix.error.dimensionError);
-  }
-
-  let output = [], row;
-  for (let i = 0; i < matrixOne.length; i++) {
-    row = [];
-    for (let j = 0; j < matrixOne[0].length; j++) {
-      row.push(matrixOne[i][j] * matrixTwo[i][j]);
-    }
-    output.push(row);
-  }
-  return output;
-};
-
-// --
-
 Matrix.elements.divide = function(matrixOne, matrixTwo) {
   if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
     throw new Error(Matrix.error.invalidError);
@@ -607,4 +585,36 @@ Matrix.elements.divide = function(matrixOne, matrixTwo) {
     output.push(row);
   }
   return output;
+};
+
+// --
+
+Matrix.elements.multiply = function(matrixOne, matrixTwo) {
+  if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
+    throw new Error(Matrix.error.invalidError);
+  }
+
+  if (matrixOne.length !== matrixTwo.length || matrixOne[0].length !== matrixTwo[0].length) {
+    throw new Error(Matrix.error.dimensionError);
+  }
+
+  let output = [], row;
+  for (let i = 0; i < matrixOne.length; i++) {
+    row = [];
+    for (let j = 0; j < matrixOne[0].length; j++) {
+      row.push(matrixOne[i][j] * matrixTwo[i][j]);
+    }
+    output.push(row);
+  }
+  return output;
+};
+
+// --
+
+Matrix.elements.power = function(inputMatrix, power) {
+  if (!isValidMatrix(inputMatrix)) throw new Error(Matrix.error.invalidError);
+  if (!isFinite(power) || isNaN(power)) {
+    throw new Error('Power must be a real finite number');
+  }
+  return inputMatrix.map(row => row.map(x => Math.pow(x, power)));
 };

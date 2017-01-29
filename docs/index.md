@@ -66,6 +66,18 @@ console.log(normalMultiply); // => [[-2, -7], [-4, -13]]
 Throws an error if the matrices have different dimensions
 or if either matrix is not valid.
 
+###  matrixes.elements.power(matrix, power)
+
+- matrix: <Matrix>
+- power: <Number> (not Infinity, not NaN)
+
+Returns a new matrix where each entry i,j from the original matrix
+has been raised to the power `power` and placed in entry i,j of the new matrix.
+
+Throws an error if the given matrix is invalid
+or if the given power is not a real, finite number.
+The power cannot be `Infinity` or `NaN`.
+
 ## Main Methods
 
 ### matrixes.add(matrixOne, matrixTwo)

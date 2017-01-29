@@ -746,34 +746,6 @@ describe('Matrix.elements', function() {
     }));
   });
 
-  describe('#multiply', function() {
-    it('should return a new matrix where entry i,j is the product of the i,jth entries of the arguments', function() {
-      let m1 = [[1, 3, 5],[-1, 0, 3],[2, 4, 1],[3, -3, -1]];
-      let m2 = [[0, -1, 3.5],[-1.2, 2, 1],[1, 12, 3],[-2, -2, -1.3]];
-      let correct = [[0, -3, 17.5],[1.2, 0, 3],[2, 48, 3],[-6, 6, 1.3]];
-      assert.equal(true, equals(Matrix.elements.multiply(m1, m2), correct, true));
-    });
-
-    it('should throw an error if either matrix is not valid', function() {
-      expect(() => Matrix.elements.multiply('asdf', [[1,2],[2,1]])).to.throw(INVALID);
-      expect(() => Matrix.elements.multiply([[1,2],[3,4]], {})).to.throw(INVALID);
-    });
-
-    it('should throw an error if the matrices have different dimensions', function() {
-      let m1 = [[1,2,3],[4,5,6]];
-      let m2 = [[1,2],[3,4],[5,6]];
-      expect(() => Matrix.elements.multiply(m1, m2)).to.throw(Matrix.error.dimensionError);
-    });
-
-    it('should not alter either original argument', function() {
-      let m1 = [[1],[2],[3],[4]];
-      let m2 = [[2],[1],[0],[-1]];
-      let res = Matrix.elements.multiply(m1, m2);
-      assert.equal(true, equals(m1, [[1],[2],[3],[4]]));
-      assert.equal(true, equals(m2, [[2],[1],[0],[-1]]));
-    });
-  });
-
   describe('#divide', function() {
     it('should return a new matrix where entry i,j is the quotient of the i,jth entries of the arguments', function() {
       let m1 = [[1,2,-3.4],[1.2,-1,0]];
@@ -810,5 +782,69 @@ describe('Matrix.elements', function() {
       assert.equal(true, equals(m1, [[-1,2],[3,-4],[5,0],[7,0]]));
       assert.equal(true, equals(m2, [[-1, 2],[3,-4],[5,-6],[1,2]]));
     });
+  });
+
+  describe('#multiply', function() {
+    it('should return a new matrix where entry i,j is the product of the i,jth entries of the arguments', function() {
+      let m1 = [[1, 3, 5],[-1, 0, 3],[2, 4, 1],[3, -3, -1]];
+      let m2 = [[0, -1, 3.5],[-1.2, 2, 1],[1, 12, 3],[-2, -2, -1.3]];
+      let correct = [[0, -3, 17.5],[1.2, 0, 3],[2, 48, 3],[-6, 6, 1.3]];
+      assert.equal(true, equals(Matrix.elements.multiply(m1, m2), correct, true));
+    });
+
+    it('should throw an error if either matrix is not valid', function() {
+      expect(() => Matrix.elements.multiply('asdf', [[1,2],[2,1]])).to.throw(INVALID);
+      expect(() => Matrix.elements.multiply([[1,2],[3,4]], {})).to.throw(INVALID);
+    });
+
+    it('should throw an error if the matrices have different dimensions', function() {
+      let m1 = [[1,2,3],[4,5,6]];
+      let m2 = [[1,2],[3,4],[5,6]];
+      expect(() => Matrix.elements.multiply(m1, m2)).to.throw(Matrix.error.dimensionError);
+    });
+
+    it('should not alter either original argument', function() {
+      let m1 = [[1],[2],[3],[4]];
+      let m2 = [[2],[1],[0],[-1]];
+      let res = Matrix.elements.multiply(m1, m2);
+      assert.equal(true, equals(m1, [[1],[2],[3],[4]]));
+      assert.equal(true, equals(m2, [[2],[1],[0],[-1]]));
+    });
+  });
+
+  describe('#power', function() {
+    it('should return a new matrix where each entry i,j has been raised to the given power', function() {
+      let m1 = [[1, 2], [8, 1.2], [3, 4]];
+      let n1 = 2;
+      let correct1 = [[1, 4], [64, 1.44], [9, 16]];
+      assert.equal(true, equals(Matrix.elements.power(m1, n1), correct1, true));
+
+      let m2 = [[8, 64], [1, 512], [0.008, 0.001]];
+      let n2 = 1/3;
+      let correct2 = [[2, 4], [1, 8], [0.2, 0.1]];
+      assert.equal(true, equals(Matrix.elements.power(m2, n2), correct2, true));
+    });
+
+    it('should throw an error if the given matrix is not valid', function() {
+      let m1 = [[1, 2], [3, '4']];
+      let n = 2;
+      expect(() => Matrix.elements.power(m1, n)).to.throw(INVALID);
+    });
+
+    it('should throw an error if the given power is not a real finite number', function() {
+      let m1 = [[3, 2, 1], [0, -1, -2]];
+      let powers = [-Infinity, NaN, Infinity];
+      for (let i = 0; i < powers.length; i++) {
+        expect(() => Matrix.elements.power(m1, powers[i])).to.throw('Power must be a real finite number');
+      }
+    });
+
+    it('should not alter either original argument', function() {
+      let m1 = [[1,2]];
+      let n = 3;
+      let res = Matrix.elements.power(m1, n);
+      assert.equal(true, equals(m1, [[1,2]]));
+      assert.equal(n, 3);
+    })
   });
 });
