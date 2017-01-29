@@ -8,7 +8,7 @@
 
 - [x] elements#power(mat, pow): element-by-element exponentiation
 
-- [ ] Possibly move errors to a different file to avoid clutter?
+- [x] Possibly move errors to a different file to avoid clutter?
 
 - [ ] Test systems with free variables and no solutions in #solve.
 
