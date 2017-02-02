@@ -327,6 +327,16 @@ Throws an error if either matrix is invalid or if the two matrices cannot be mul
 To be multipliable, `matrixOne` must have dimensions *m x n* and `matrixTwo` must have dimensions *n x p*.
 (For any positive, nonzero integers m, n, and p.)
 
+### matrixes.ones(numRows, numColumns)
+
+- numRows: <Integer> *or* a float, double, etc. that is equivalent to an integer
+- numColumns: <Integer> *or* a float, double, etc. that is equivalent to an integer
+
+Returns a matrix of ones of the size `numRows` by `numColumns`.
+
+Throws an error if either `numRows` or `numColumns`
+is not an integer strictly greater than 0.
+
 ### matrixes.random(numRows, numColumns)
 
 - numRows: <Integer> *or* a float, double, etc. that is equivalent to an integer

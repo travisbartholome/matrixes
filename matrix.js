@@ -358,6 +358,29 @@ Matrix.multiply = multiply;
 
 // --
 
+function ones(numRows, numColumns) {
+  if (!Number.isInteger(numRows) || !Number.isInteger(numColumns)) {
+    throw new Error(Matrix.error.inputSizeIntegerError);
+  }
+
+  if (numRows <= 0 || numColumns <= 0) {
+    throw new Error(Matrix.error.inputSizeNonnegativeError);
+  }
+
+  let matrix = [];
+  for (let i = 0; i < numRows; i++) {
+    let row = [];
+    for (let j = 0; j < numColumns; j++) {
+      row.push(1)
+    }
+    matrix.push(row);
+  }
+  return matrix;
+}
+Matrix.ones = ones;
+
+// --
+
 function random(numRows, numColumns) {
   if (!Number.isInteger(numRows) || !Number.isInteger(numColumns)) {
     // Consider using Number.isSafeInteger here.

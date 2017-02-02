@@ -10,6 +10,10 @@
 
 - [x] Possibly move errors to a different file to avoid clutter?
 
+- [x] Add a #ones method.
+
+- [ ] Make tests for #ones unique from tests for #zeros?
+
 - [ ] Test systems with free variables and no solutions in #solve.
 
 - [ ] Figure out how to test #disp.
