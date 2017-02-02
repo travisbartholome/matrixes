@@ -66,7 +66,7 @@ describe('#createMatrix', function() {
     expect(() => Matrix.createMatrix('[;]tfxm')).to.throw(nonFinite);
   });
 
-  it('should throw an error if the input is not a string.', function() {
+  it('should throw an error if the input is not a string', function() {
     expect(() => Matrix.createMatrix()).to.throw('Input to createMatrix must be a string');
     expect(() => Matrix.createMatrix({})).to.throw('Input to createMatrix must be a string');
     expect(() => Matrix.createMatrix([])).to.throw('Input to createMatrix must be a string');
@@ -76,7 +76,7 @@ describe('#createMatrix', function() {
     expect(() => Matrix.createMatrix(function() { return 3; })).to.throw('Input to createMatrix must be a string');
   });
 
-  it('should throw an error if the matrix would not be rectangular.', function() {
+  it('should throw an error if the matrix would not be rectangular', function() {
     expect(() => Matrix.createMatrix('1 2, 1')).to.throw('Matrix must be rectangular');
     expect(() => Matrix.createMatrix('1, 2, 3 4')).to.throw('Matrix must be rectangular');
     expect(() => Matrix.createMatrix('1 2, 3 4, 5 6 7')).to.throw('Matrix must be rectangular');
@@ -84,17 +84,17 @@ describe('#createMatrix', function() {
 });
 
 describe('#identity', function() {
-  it('should return an identity matrix with the size that was passed in.', function() {
+  it('should return an identity matrix with the size that was passed in', function() {
     assert.equal(equals(Matrix.identity(2), [[1,0],[0,1]]), true);
     assert.equal(equals(Matrix.identity(5), [[1,0,0,0,0],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,0,0,0,1]]), true);
   });
 
-  it('should accept integers stored as floats with decimal zeros.', function() {
+  it('should accept integers stored as floats with decimal zeros', function() {
     assert.equal(equals(Matrix.identity(2.000), [[1,0],[0,1]]), true);
     assert.equal(equals(Matrix.identity(4.000), [[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]), true);
   });
 
-  it('should throw an error for all non-integer arguments.', function() {
+  it('should throw an error for all non-integer arguments', function() {
     expect(() => Matrix.identity(1.23)).to.throw('Invalid matrix size: must be an integer');
     expect(() => Matrix.identity(3.212)).to.throw('Invalid matrix size: must be an integer');
     expect(() => Matrix.identity(Infinity)).to.throw('Invalid matrix size: must be an integer');
@@ -105,10 +105,46 @@ describe('#identity', function() {
     expect(() => Matrix.identity({})).to.throw('Invalid matrix size: must be an integer');
   });
 
-  it('should throw an error if the argument is <= 0.', function() {
+  it('should throw an error if the argument is <= 0', function() {
     expect(() => Matrix.identity(0)).to.throw('Invalid matrix size: must be greater than 0');
     expect(() => Matrix.identity(-1)).to.throw('Invalid matrix size: must be greater than 0');
     expect(() => Matrix.identity(-5)).to.throw('Invalid matrix size: must be greater than 0');
+  });
+});
+
+describe('#ones', function() {
+  it('should return a matrix of ones with the size that was passed in', function() {
+    assert.equal(equals(Matrix.ones(2, 2), [[1, 1], [1, 1]]), true);
+    assert.equal(equals(Matrix.ones(2, 3), [[1,1,1],[1,1,1]]), true);
+    assert.equal(equals(Matrix.ones(3, 1), [[1],[1],[1]]), true);
+  });
+
+  it('should accept integers stored as floats with decimal zeros', function() {
+    assert.equal(equals(Matrix.ones(2.00, 2), [[1, 1], [1, 1]]), true);
+    assert.equal(equals(Matrix.ones(3.0, 3.00), [[1,1,1],[1,1,1],[1,1,1]]), true);
+    assert.equal(equals(Matrix.ones(1.0000, 2.0), [[1, 1]]), true);
+  });
+
+  it('should throw an error for all non-integer arguments', function() {
+    let integerSizeError = Matrix.error.inputSizeIntegerError;
+    expect(() => Matrix.ones(1.23, 3)).to.throw(integerSizeError);
+    expect(() => Matrix.ones(2, 3.212)).to.throw(integerSizeError);
+    expect(() => Matrix.ones('2', 3)).to.throw(integerSizeError);
+    expect(() => Matrix.ones(Infinity, 3)).to.throw(integerSizeError);
+    expect(() => Matrix.ones(2, -Infinity)).to.throw(integerSizeError);
+    expect(() => Matrix.ones(NaN, 3)).to.throw(integerSizeError);
+    expect(() => Matrix.ones(2, 'asdf')).to.throw(integerSizeError);
+    expect(() => Matrix.ones([], 3)).to.throw(integerSizeError);
+    expect(() => Matrix.ones(2, {})).to.throw(integerSizeError);
+  });
+
+  it('should throw an error if the argument is <= 0', function() {
+    let nonzeroSizeError = Matrix.error.inputSizeNonnegativeError;
+    expect(() => Matrix.ones(0, 3)).to.throw(nonzeroSizeError);
+    expect(() => Matrix.ones(2, -1)).to.throw(nonzeroSizeError);
+    expect(() => Matrix.ones(-2, 0)).to.throw(nonzeroSizeError);
+    expect(() => Matrix.ones(0, 0)).to.throw(nonzeroSizeError);
+    expect(() => Matrix.ones(0, -3)).to.throw(nonzeroSizeError);
   });
 });
 
@@ -167,19 +203,19 @@ describe('#random', function() {
 });
 
 describe('#zeros', function() {
-  it('should return a zero matrix with the size that was passed in.', function() {
+  it('should return a zero matrix with the size that was passed in', function() {
     assert.equal(equals(Matrix.zeros(2, 2), [[0, 0], [0, 0]]), true);
     assert.equal(equals(Matrix.zeros(2, 3), [[0,0,0],[0,0,0]]), true);
     assert.equal(equals(Matrix.zeros(3, 1), [[0],[0],[0]]), true);
   });
 
-  it('should accept integers stored as floats with decimal zeros.', function() {
+  it('should accept integers stored as floats with decimal zeros', function() {
     assert.equal(equals(Matrix.zeros(2.00, 2), [[0, 0], [0, 0]]), true);
     assert.equal(equals(Matrix.zeros(3.0, 3.00), [[0,0,0],[0,0,0],[0,0,0]]), true);
     assert.equal(equals(Matrix.zeros(1.0000, 2.0), [[0, 0]]), true);
   });
 
-  it('should throw an error for all non-integer arguments.', function() {
+  it('should throw an error for all non-integer arguments', function() {
     let integerSizeError = Matrix.error.inputSizeIntegerError;
     expect(() => Matrix.zeros(1.23, 3)).to.throw(integerSizeError);
     expect(() => Matrix.zeros(2, 3.212)).to.throw(integerSizeError);
@@ -192,7 +228,7 @@ describe('#zeros', function() {
     expect(() => Matrix.zeros(2, {})).to.throw(integerSizeError);
   });
 
-  it('should throw an error if the argument is <= 0.', function() {
+  it('should throw an error if the argument is <= 0', function() {
     let nonzeroSizeError = Matrix.error.inputSizeNonnegativeError;
     expect(() => Matrix.zeros(0, 3)).to.throw(nonzeroSizeError);
     expect(() => Matrix.zeros(2, -1)).to.throw(nonzeroSizeError);
