@@ -12,6 +12,10 @@
 
 - [x] Add a #ones method.
 
+- [x] Modify #add to take an arbitrary number of arguments (greater than two).
+
+- [ ] Make "number of arguments" error in #add reusable.
+
 - [ ] Make tests for #ones unique from tests for #zeros?
 
 - [ ] Test systems with free variables and no solutions in #solve.

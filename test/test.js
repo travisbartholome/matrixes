@@ -244,14 +244,26 @@ describe('#add', function() {
     assert.equal(equals(Matrix.add([[1, 2], [1, 2]], [[0, 2], [3, -4]]), [[1, 4], [4, -2]]), true);
   });
 
-  it('should throw an error if the two matrices do not have the same dimensions', function() {
-    expect(() => Matrix.add([[1, 2, 3], [1, 2, 3]], [[1, 2], [3, 4]])).to.throw(Matrix.error.dimensionError);
+  it('should return the sum of more than two matrices passed in', function() {
+    assert.equal(true, equals(Matrix.add([[1,2]],[[0,-1]],[[2,1]],[[-3,1]]), [[0,3]]));
   });
 
-  it('should throw an error if either matrix is invalid', function() {
+  it('should throw an error if less than two matrices are passed in', function() {
+    expect(() => Matrix.add([[1,2,3],[4,5,6]])).to.throw('Must provide at least two arguments')
+  });
+
+  it('should throw an error if any of the matrices do not have the same dimensions', function() {
+    expect(() => Matrix.add([[1, 2, 3], [1, 2, 3]], [[1, 2], [3, 4]])).to.throw(Matrix.error.dimensionError);
+    expect(() => Matrix.add([[1,2],[3,4]], [[0,1],[-2,1]], [[2,1]], [[2,1],[-2,-3]]))
+      .to.throw(Matrix.error.dimensionError);
+  });
+
+  it('should throw an error if any matrix is invalid', function() {
     for (let i = 0; i < INVALID_MATRICES.length; i++) {
       expect(() => Matrix.add([[1, 2],[3, 4]], INVALID_MATRICES[i])).to.throw(INVALID);
     }
+    expect(() => Matrix.add({}, [[1,2]])).to.throw(INVALID);
+    expect(() => Matrix.add([[1,2]], [[3,4]], 'hi', [[4,5]])).to.throw(INVALID);
   });
 });
 
@@ -702,7 +714,7 @@ describe('#disp', function() {
     });
 
     describe('should allot each entry as much space the longest entry will require', function(){
-      it('should work if the longest entry in the main matrix', function() {
+      it('should work if the longest entry is in the main matrix', function() {
 
       });
 

@@ -80,15 +80,17 @@ The power cannot be `Infinity` or `NaN`.
 
 ## Main Methods
 
-### matrixes.add(matrixOne, matrixTwo)
+### matrixes.add(matrixOne, matrixTwo, ...)
 
 - matrixOne: <Matrix>
 - matrixTwo: <Matrix>
+- ... (Arbitrary number of Matrix arguments)
 
-Returns the matrix sum of `matrixOne` and `matrixTwo`.
-Doesn't alter either argument.
+Returns the matrix sum of all matrices passed in.
+This function must take *at least* two arguments.
+Doesn't alter any of the arguments.
 
-Throws an error if the matrices do not have the same dimensions or if either matrix is invalid.
+Throws an error if the matrices do not have the same dimensions or if any matrix is invalid.
 
 ### matrixes.augment(matrixOne, matrixTwo)
 

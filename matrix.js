@@ -107,20 +107,34 @@ Matrix.copy = copy;
 
 /* Methods */
 
-function add(matrixOne, matrixTwo) {
-  if (!isValidMatrix(matrixOne) || !isValidMatrix(matrixTwo)) {
-    throw new Error(Matrix.error.invalidError);
+function add(matrixArgs) {
+  if (arguments.length < 2) {
+    throw new Error('Must provide at least two arguments');
   }
 
-  if (matrixOne.length !== matrixTwo.length || matrixOne[0].length !== matrixTwo[0].length) {
-    throw new Error(Matrix.error.dimensionError);
+  for (let i = 0; i < arguments.length; i++) {
+    if (!isValidMatrix(arguments[i])) {
+      throw new Error(Matrix.error.invalidError);
+    }
+  }
+
+  let numRows = arguments[0].length;
+  let numCols = arguments[0][0].length;
+
+  for (let i = 1; i < arguments.length; i++) {
+    if (arguments[i].length !== numRows || arguments[i][0].length !== numCols) {
+      throw new Error(Matrix.error.dimensionError);
+    }
   }
 
   let output = [];
-  for (let i = 0; i < matrixOne.length; i++) {
+  for (let i = 0; i < numRows; i++) {
     output.push([]);
-    for (let j = 0; j < matrixOne[0].length; j++) {
-      output[i].push(matrixOne[i][j] + matrixTwo[i][j]);
+    for (let j = 0; j < numCols; j++) {
+      output[i].push(0);
+      for (let k = 0; k < arguments.length; k++) {
+        output[i][j] += arguments[k][i][j];
+      }
     }
   }
   return output;
