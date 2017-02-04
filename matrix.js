@@ -109,7 +109,7 @@ Matrix.copy = copy;
 
 function add(matrixArgs) {
   if (arguments.length < 2) {
-    throw new Error('Must provide at least two arguments');
+    throw new Error(Matrix.error.argNeedTwoError);
   }
 
   for (let i = 0; i < arguments.length; i++) {
