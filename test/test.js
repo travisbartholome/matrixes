@@ -248,8 +248,8 @@ describe('#add', function() {
     assert.equal(true, equals(Matrix.add([[1,2]],[[0,-1]],[[2,1]],[[-3,1]]), [[0,3]]));
   });
 
-  it('should throw an error if less than two matrices are passed in', function() {
-    expect(() => Matrix.add([[1,2,3],[4,5,6]])).to.throw('Must provide at least two arguments')
+  it('should throw an error if fewer than two matrices are passed in', function() {
+    expect(() => Matrix.add([[1,2,3],[4,5,6]])).to.throw(Matrix.error.argNeedTwoError);
   });
 
   it('should throw an error if any of the matrices do not have the same dimensions', function() {
@@ -525,14 +525,31 @@ describe('#subtract', function() {
     assert.equal(equals(Matrix.subtract([[1, 2], [1, 2]], [[0, 2], [3, -4]]), [[1, 0], [-2, 6]]), true);
   });
 
-  it('should throw an error if the two matrices do not have the same dimensions', function() {
-    expect(() => Matrix.subtract([[1, 2, 3], [1, 2, 3]], [[1, 2], [3, 4]])).to.throw(Matrix.error.dimensionError);
+  it('should return the difference of two or more matrices passed in', function() {
+    let m1 = [[2,3],[4,1]];
+    let m2 = [[-1,0],[0.3,2]];
+    let m3 = [[2,1],[0,0]];
+    let m4 = [[-1.2,-1],[-0,-2]];
+    assert.equal(true, equals(Matrix.subtract(m1, m2, m3), [[1,2],[3.7,-1]]));
+    assert.equal(true, equals(Matrix.subtract(m1, m2, m3, m4), [[2.2,3],[3.7,1]]))
   });
 
-  it('should throw an error if either matrix is invalid', function() {
+  it('should throw an error if fewer than two matrices are passed in', function() {
+    expect(() => Matrix.subtract()).to.throw(Matrix.error.argNeedTwoError);
+    expect(() => Matrix.subtract([[1,2],[3,4]])).to.throw(Matrix.error.argNeedTwoError);
+  });
+
+  it('should throw an error if any of the matrices do not have the same dimensions', function() {
+    expect(() => Matrix.subtract([[1, 2, 3], [1, 2, 3]], [[1, 2], [3, 4]])).to.throw(Matrix.error.dimensionError);
+    expect(() => Matrix.subtract([[1,2]], [[2,3]], [[4,5]], [[1,2,3]])).to.throw(Matrix.error.dimensionError);
+  });
+
+  it('should throw an error if any matrix is invalid', function() {
     for (let i = 0; i < INVALID_MATRICES.length; i++) {
       expect(() => Matrix.subtract(INVALID_MATRICES[i], [[1, 2],[3, 4]])).to.throw(INVALID);
     }
+    expect(() => Matrix.subtract([[2,1]], [[3,4]], [1], [[2,3]])).to.throw(INVALID);
+    expect(() => Matrix.subtract([[2,3],[4,5],[1,2]], 'asdf')).to.throw(INVALID);
   });
 });
 

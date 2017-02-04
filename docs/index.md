@@ -466,11 +466,15 @@ console.log(matrixes.solve(coeffs, solns)); // => [ 2 , 1 ]
 
 - matrixOne: <Matrix>
 - matrixTwo: <Matrix>
+- ... (Arbitrary number of Matrix arguments)
 
-Returns the matrix difference `matrixOne` minus `matrixTwo`.
-Doesn't alter either argument.
+Returns the matrix created by subtracting each successive matrix
+(starting with the second) from the first.
+The result is equivalent to `arguments[0] - sum(arguments[1], arguments[2], ...)`.
+This function must take *at least* two arguments.
+Doesn't alter any of the arguments.
 
-Throws an error if the matrices do not have the same dimensions or if either matrix is invalid.
+Throws an error if the matrices do not have the same dimensions or if any matrix is invalid.
 
 ### matrixes.stack(matrixOne, matrixTwo)
 

@@ -14,7 +14,9 @@
 
 - [x] Modify #add to take an arbitrary number of arguments (greater than two).
 
-- [ ] Make "number of arguments" error in #add reusable.
+- [x] Make "number of arguments" error in #add reusable.
+
+- [x] Modify #subtract to take an arbitrary number of arguments (greater than two).
 
 - [ ] Make tests for #ones unique from tests for #zeros?
 
