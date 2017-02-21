@@ -909,3 +909,40 @@ describe('Matrix.elements', function() {
     })
   });
 });
+
+
+
+/* Matrix constructor */
+describe('Matrix constructor', function() {
+  it('should behave identically to #createMatrix', function() {
+    // Correct creation behavior
+    assert.equal(equals(Matrix('1 2, 3 4'), [[1, 2], [3, 4]]), true);
+    assert.equal(equals(Matrix('1 2,3 4'), [[1, 2], [3, 4]]), true);
+    assert.equal(equals(Matrix('0, 0, 0'), [[0],[0],[0]]), true);
+
+    // Scientific notation
+    assert.equal(equals(Matrix('1.123 2.3, 5.00 1e3'), [[1.123, 2.3],[5, 1000]]), true);
+
+    // Error for non-numerical entries
+    let nonFinite = Matrix.error.createNonFiniteError;
+    expect(() => Matrix('1 g, 3 4')).to.throw(nonFinite);
+    expect(() => Matrix('asdf asdf')).to.throw(nonFinite);
+
+    // Error for non-string entries
+    expect(() => Matrix()).to.throw('Input to createMatrix must be a string');
+    expect(() => Matrix(NaN)).to.throw('Input to createMatrix must be a string');
+    expect(() => Matrix(String.prototype)).to.throw('Input to createMatrix must be a string');
+    expect(() => Matrix(function() { return 3; })).to.throw('Input to createMatrix must be a string');
+
+    // Error for non-rectangular matrices
+    expect(() => Matrix('1 2, 1')).to.throw('Matrix must be rectangular');
+    expect(() => Matrix('1, 2, 3 4')).to.throw('Matrix must be rectangular');
+  });
+});
+
+
+
+/* Matrix prototype */
+describe.skip('Matrix.prototype', function() {
+
+});
