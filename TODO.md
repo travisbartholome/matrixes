@@ -2,7 +2,7 @@
 
 - [x] In test.js, put error messages in constants or an object for consistency and reuse.
 
-    * Possibly define a `matrix.errors` object for this?
+    * Possibly define a `Matrix.errors` object for this?
 
     * Use for matrix.js as well
 
@@ -18,11 +18,23 @@
 
 - [x] Modify #subtract to take an arbitrary number of arguments (greater than two).
 
+- [ ] Consider adding methods that alter the argument in place.
+
+    * These might be best as methods on `Matrix.prototype` rather than on `Matrix` itself.
+
+    * I.e., usage would be `A.scale(2)` (doubles A without creating a new matrix)
+      vs. `B = Matrix.scale(A, 2);` (creates a new matrix that is double matrix A).
+
+    * disp, add, scale, subtract, multiply, reduce (?),
+      det, inverse, transpose, "is (something)" assertions...
+
 - [ ] Make tests for #ones unique from tests for #zeros?
 
 - [ ] Test systems with free variables and no solutions in #solve.
 
 - [ ] Figure out how to test #disp.
+
+- [ ] Make matrix creator string syntax mimic that of MATLAB?
 
 - [ ] Add more example scripts.
 
@@ -31,16 +43,6 @@
 - [ ] Optimize #inverse and #det methods?
 
 - [ ] Try to DRY up the tests a little bit when testing things like error handling and invalid arguments.
-
-- [ ] Consider adding methods that alter the argument in place.
-
-    * These might be best as methods on `matrix.prototype` rather than on `matrix` itself.
-
-    * I.e., usage would be `A.scale(2)` (doubles A without creating a new matrix)
-      vs. `B = matrix.scale(A, 2);` (creates a new matrix that is double matrix A).
-
-    * disp, add, scale, subtract, multiply, reduce (?),
-      det, inverse, transpose, "is (something)" assertions...
 
 - [ ] Add support for math expressions in #createMatrix. Avoid using `eval`.
 

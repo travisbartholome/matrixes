@@ -14,6 +14,44 @@ It's been my first real foray into TDD, which seems to be working fairly well.
 
 # Documentation
 
+## Matrixes constructor
+
+### matrixes(matrixString)
+
+- matrixString: <String>
+
+For simplicity, the user can create a matrix using basic constructor functionality:
+
+```javascript
+
+const matrixes = require('matrixes');
+
+let A = matrixes("1 2 3, 4 5 6, 1 2 3");
+console.log(A);
+// => [ [1, 2, 3], [4, 5, 6], [1, 2, 3] ]
+
+// This is equivalent to the following:
+let B = matrixes.createMatrix("1 2 3, 4 5 6, 1 2 3");
+
+```
+
+matrixString should fit one of the following patterns:
+
+- "1 2 3, 4 5 6, 7 8 9"
+
+- "1 2 3,4 5 6,7 8 9"
+
+See the entry for matrixes.createMatrix for extra information.
+
+## Matrixes prototype
+
+Some methods are defined on `matrixes.prototype`.
+
+When called, these methods will alter the instance of the matrixes object from
+which they're called.
+
+<!-- TODO: Add examples and subsections as you create these methods -->
+
 ## Matrixes.elements
 
 These methods perform element-by-element arithmetic operations on matrices.
@@ -141,6 +179,7 @@ Matrices are encoded as arrays of arrays.
 matrixString should fit one of the following patterns:
 
 - "1 2 3, 4 5 6, 7 8 9"
+
 - "1 2 3,4 5 6,7 8 9"
 
 All of the above options will create the matrix `[[1, 2, 3], [4, 5, 6], [7, 8, 9]]`.
