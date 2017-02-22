@@ -1,5 +1,25 @@
 # TODO items completed with each version
 
+### v1.1.0 (published)
+
+- [x] In test.js, put error messages in constants or an object for consistency and reuse.
+
+    * Possibly define a `Matrix.errors` object for this?
+
+    * Use for matrix.js as well
+
+- [x] elements#power(mat, pow): element-by-element exponentiation
+
+- [x] Possibly move errors to a different file to avoid clutter?
+
+- [x] Add a #ones method.
+
+- [x] Modify #add to take an arbitrary number of arguments (greater than two).
+
+- [x] Make "number of arguments" error in #add reusable.
+
+- [x] Modify #subtract to take an arbitrary number of arguments (greater than two).
+
 ### v1.0.5 (published)
 
 - [x] Consider moving completed items in TODO to a CHANGELOG file.

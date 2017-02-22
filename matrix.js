@@ -674,3 +674,11 @@ Matrix.elements.power = function(inputMatrix, power) {
   }
   return inputMatrix.map(row => row.map(x => Math.pow(x, power)));
 };
+
+// ---------------
+
+/* Matrix.prototype */
+
+Matrix.prototype.add = function(matrixArgs) {
+  return (Matrix.add.bind(arguments))(this);
+}

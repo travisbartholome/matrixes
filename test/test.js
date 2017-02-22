@@ -943,6 +943,21 @@ describe('Matrix constructor', function() {
 
 
 /* Matrix prototype */
-describe.skip('Matrix.prototype', function() {
+describe('Matrix.prototype', function() {
+  describe('#add', function() {
+    it('should add its argument to the instance of Matrix on which it\'s called', function() {
+      let A = Matrix('5 2 0, -3 1 -2');
+      let B = Matrix('1 2 3, 0 -1 -2');
+      let C = [[6, 4, 3], [-3, 0, -4]];
+      assert.equal(true, equals(A.add(B), C));
+    });
 
+    it.skip('should throw an error if the argument is not the same size as the instance', function() {
+
+    });
+
+    it.skip('should throw an error if the argument is not a valid matrix', function() {
+
+    });
+  });
 });

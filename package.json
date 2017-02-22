@@ -23,10 +23,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/travisbartholome/matrix-ops.git"
+    "url": "https://github.com/travisbartholome/matrixes.git"
   },
   "bugs": {
-    "url": "https://github.com/travisbartholome/matrix-ops/issues"
+    "url": "https://github.com/travisbartholome/matrixes/issues"
   },
   "devDependencies": {
     "chai": "^3.5.0",
